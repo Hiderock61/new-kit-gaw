@@ -123,6 +123,8 @@ const appState = {
   ]
 };
 const app = document.getElementById("app");
+const toast = document.getElementById("toast");
+let toastTimer = null;
 
 const safe = value => String(value ?? "").replace(/[&<>"']/g, ch => (
   { "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" }[ch]
@@ -183,15 +185,28 @@ function switchViewer(profileId) {
   renderApp();
 }
 function recordFootprint(viewedProfileId) {
-  if (!getProfile(viewedProfileId) || viewedProfileId === appState.currentViewerId) return;
+  if (!getProfile(viewedProfileId) || viewedProfileId === appState.currentViewerId) return false;
   const existing = appState.footprints.find(item =>
     item.viewerId === appState.currentViewerId && item.viewedProfileId === viewedProfileId
   );
   const latestVisitedAt = new Intl.DateTimeFormat("ja-JP", {
     month:"numeric", day:"numeric", hour:"2-digit", minute:"2-digit"
   }).format(new Date()).replace("/", "月").replace(" ", "日 ");
-  if (existing) existing.latestVisitedAt = latestVisitedAt;
-  else appState.footprints.push({ viewerId:appState.currentViewerId, viewedProfileId, latestVisitedAt });
+  if (existing) {
+    existing.latestVisitedAt = latestVisitedAt;
+    return false;
+  }
+  appState.footprints.push({ viewerId:appState.currentViewerId, viewedProfileId, latestVisitedAt });
+  return true;
+}
+function showToast(message) {
+  if (!toast) return;
+  window.clearTimeout(toastTimer);
+  toast.textContent = message;
+  toast.classList.add("is-visible");
+  toastTimer = window.setTimeout(() => {
+    toast.classList.remove("is-visible");
+  }, 2400);
 }
 
 function renderBackHeader() {
@@ -251,13 +266,13 @@ function renderContextBanner(profileId, active = false) {
   if (!profile) return "";
   if (active) {
     return `<aside class="context-banner">
-      <p>${safe(profile.name)}の活動を見ています</p>
+      <p>${safe(profile.name)}のトピックと発言</p>
       <button class="plain-link" data-action="clear-activity-filter">コミュニティ全体を見る ＞</button>
     </aside>`;
   }
   return `<aside class="context-banner">
     <p>${safe(profile.name)}も参加しています</p>
-    <button class="plain-link" data-action="show-profile-activity" data-profile-id="${safe(profile.id)}">${safe(profile.name)}の活動を見る ＞</button>
+    <button class="plain-link" data-action="show-profile-activity" data-profile-id="${safe(profile.id)}">${safe(profile.name)}のトピックと発言を見る ＞</button>
   </aside>`;
 }
 
@@ -296,7 +311,8 @@ function renderHome() {
 function renderProfileDetail() {
   const profile = getProfile(appState.currentParams.profileId);
   if (!profile) return renderError("プロフィールが見つかりません。");
-  recordFootprint(profile.id);
+  const footprintCreated = recordFootprint(profile.id);
+  if (footprintCreated) window.setTimeout(() => showToast("足あとがつきました"), 0);
   const isSelf = profile.id === appState.currentViewerId;
   const communities = profile.communityIds.slice(0,5).map(id => renderCommunityItem(id, {
     contextProfileId: isSelf ? null : profile.id,
@@ -371,7 +387,7 @@ function renderCommunityDetail() {
     }).slice(0,3);
     const noActivity = !filteredTopics.length && !filteredStatements.length;
     content = `${renderContextBanner(filterProfile.id, true)}
-      ${noActivity ? renderEmptyState(`${filterProfile.name}はこのコミュニティに参加していますが、まだトピックや発言はありません。`) : `
+      ${noActivity ? renderEmptyState(`${filterProfile.name}はこのコミュニティで、まだトピックや発言を残していません。`) : `
         <h2 class="section-title">${safe(filterProfile.name)}が立てたトピック</h2>
         <div class="stack">${filteredTopics.length ? filteredTopics.map(t => renderTopicItem(t.id)).join("") : renderEmptyState("立てたトピックはありません。")}</div>
         <h2 class="section-title">${safe(filterProfile.name)}が残した発言</h2>

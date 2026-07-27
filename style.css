@@ -275,11 +275,34 @@ button { -webkit-tap-highlight-color: transparent; }
   cursor: pointer;
 }
 
+.toast {
+  position: fixed;
+  z-index: 10;
+  left: 50%;
+  bottom: max(22px, env(safe-area-inset-bottom));
+  max-width: calc(100% - 32px);
+  padding: 10px 16px;
+  border-radius: 8px;
+  background: #242424;
+  color: #fff;
+  font-size: 14px;
+  line-height: 1.4;
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 8px);
+  transition: opacity .16s ease, transform .16s ease;
+}
+.toast.is-visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
 .error-box { margin-top: 40px; }
 @media (min-width: 600px) {
   body { padding: 24px 0; }
   .app-shell { min-height: calc(100dvh - 48px); border: 1px solid var(--line); }
 }
 @media (prefers-reduced-motion: reduce) {
-  * { scroll-behavior: auto !important; }
+  * { scroll-behavior: auto !important; transition: none !important; }
 }
