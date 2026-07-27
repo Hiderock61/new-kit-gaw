@@ -123,6 +123,36 @@ button { -webkit-tap-highlight-color: transparent; }
 .profile-head { display: flex; gap: 15px; align-items: center; margin-top: 18px; }
 
 .stack { display: grid; gap: 10px; }
+.home-community-list {
+  display: grid;
+  gap: 6px;
+}
+.home-community-card {
+  width: 100%;
+  min-height: 52px;
+  padding: 8px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: var(--color-surface);
+  box-shadow: none;
+  text-align: left;
+  cursor: pointer;
+}
+.home-community-name {
+  display: block;
+  font-weight: 700;
+  line-height: 1.35;
+}
+.home-community-description {
+  display: block;
+  margin-top: 2px;
+  color: var(--color-text-soft);
+  font-size: 12px;
+  line-height: 1.35;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .list-item {
   width: 100%;
   min-height: 70px;
@@ -187,6 +217,7 @@ button { -webkit-tap-highlight-color: transparent; }
 .person-mini .avatar { width: 34px; height: 34px; font-size: 13px; }
 .person-mini__name { font-weight: 650; }
 .person-mini__hint { margin-left: auto; color: var(--color-primary-dark); font-size: 12px; }
+.person-mini--static { cursor: default; }
 .read-hint { display: block; margin-top: 10px; font-size: 13px; font-weight: 650; }
 
 .context-banner {
@@ -316,11 +347,11 @@ button { -webkit-tap-highlight-color: transparent; }
 
 @media (hover: hover) {
   .back-button:hover, .text-link:hover, .plain-link:hover { color: var(--color-primary); }
-  .list-item:hover, .topic-main:hover, .statement-main:hover, .detail-link:hover {
+  .home-community-card:hover, .list-item:hover, .topic-main:hover, .statement-main:hover, .detail-link:hover {
     background: var(--color-surface-soft);
   }
 }
-.list-item:active, .topic-main:active, .statement-main:active, .detail-link:active {
+.home-community-card:active, .list-item:active, .topic-main:active, .statement-main:active, .detail-link:active {
   background: var(--color-surface-soft);
 }
 

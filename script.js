@@ -214,9 +214,15 @@ function renderBackHeader() {
   const label = routeLabel(appState.history[appState.history.length - 1]);
   return `<header class="back-header"><button class="back-button" data-action="back">← ${safe(truncate(label))}</button></header>`;
 }
-function renderPersonMini(profileId, hint = "プロフィールを見る") {
+function renderPersonMini(profileId, hint = "プロフィールを見る", options = {}) {
   const profile = getProfile(profileId);
   if (!profile) return "";
+  if (options.static) {
+    return `<div class="person-mini person-mini--static">
+      <span class="avatar" aria-hidden="true">${safe(profile.name.slice(0,1))}</span>
+      <span class="person-mini__name">${safe(profile.name)}</span>
+    </div>`;
+  }
   return `<button class="person-mini" data-action="open-profile" data-profile-id="${safe(profile.id)}">
     <span class="avatar" aria-hidden="true">${safe(profile.name.slice(0,1))}</span>
     <span class="person-mini__name">${safe(profile.name)}</span>
@@ -236,7 +242,15 @@ function renderCommunityItem(communityId, options = {}) {
     ${statusLabel(options.label)}
   </button>`;
 }
-function renderTopicItem(topicId) {
+function renderHomeCommunityItem(communityId) {
+  const community = getCommunity(communityId);
+  if (!community) return "";
+  return `<button class="home-community-card" data-action="open-community" data-community-id="${safe(community.id)}">
+    <span class="home-community-name">${safe(community.name)}</span>
+    <span class="home-community-description">${safe(community.description)}</span>
+  </button>`;
+}
+function renderTopicItem(topicId, options = {}) {
   const topic = getTopic(topicId);
   if (!topic) return "";
   return `<article class="topic-card">
@@ -244,14 +258,14 @@ function renderTopicItem(topicId) {
       <span class="item-title">${safe(topic.title)}</span>
       <span class="excerpt">${safe(topic.body)}</span>
     </button>
-    ${renderPersonMini(topic.authorId)}
+    ${renderPersonMini(topic.authorId, "プロフィールを見る", { static:options.staticAuthor === true })}
   </article>`;
 }
-function renderStatementItem(statementId) {
+function renderStatementItem(statementId, options = {}) {
   const statement = getStatement(statementId);
   if (!statement) return "";
   return `<article class="statement-card">
-    ${renderPersonMini(statement.authorId)}
+    ${renderPersonMini(statement.authorId, "プロフィールを見る", { static:options.staticAuthor === true })}
     <button class="statement-main" data-action="open-statement" data-statement-id="${safe(statement.id)}">
       <span class="excerpt">${safe(statement.body)}</span>
       <span class="read-hint">発言を読む ＞</span>
@@ -281,10 +295,10 @@ function renderHome() {
   if (!viewer) return renderError("現在の利用者が見つかりません。");
   const footprints = appState.footprints.filter(item => item.viewedProfileId === viewer.id);
   const communityItems = viewer.communityIds.slice(0,4).map(id =>
-    renderCommunityItem(id, { label:"参加中" })
+    renderHomeCommunityItem(id)
   ).join("");
   const communitySection = viewer.communityIds.length
-    ? `${communityItems}<button class="text-link" data-action="open-profile-communities" data-profile-id="${safe(viewer.id)}">参加コミュニティ 全${viewer.communityIds.length}件を見る ＞</button>`
+    ? `<div class="home-community-list">${communityItems}</div><button class="text-link" data-action="open-profile-communities" data-profile-id="${safe(viewer.id)}">参加コミュニティ 全${viewer.communityIds.length}件を見る ＞</button>`
     : `${renderEmptyState("参加コミュニティはありません。")}<button class="text-link" data-action="open-community-search">コミュニティを探す ＞</button>`;
   const otherViewer = viewer.id === "sora" ? "nagi" : "sora";
   return `<section class="screen">
@@ -329,9 +343,9 @@ function renderProfileDetail() {
     <div class="stack">${communities || renderEmptyState("所属コミュニティはありません。")}</div>
     ${profile.communityIds.length ? `<button class="text-link" data-action="open-profile-communities" data-profile-id="${safe(profile.id)}">所属している全コミュニティを見る ＞</button>` : ""}
     <h2 class="section-title">立てたトピック</h2>
-    <div class="stack">${topics.length ? topics.map(t => renderTopicItem(t.id)).join("") : renderEmptyState("立てたトピックはありません。")}</div>
+    <div class="stack">${topics.length ? topics.map(t => renderTopicItem(t.id, { staticAuthor:isSelf })).join("") : renderEmptyState("立てたトピックはありません。")}</div>
     <h2 class="section-title">残した発言</h2>
-    <div class="stack">${statements.length ? statements.map(s => renderStatementItem(s.id)).join("") : renderEmptyState("残した発言はありません。")}</div>
+    <div class="stack">${statements.length ? statements.map(s => renderStatementItem(s.id, { staticAuthor:isSelf })).join("") : renderEmptyState("残した発言はありません。")}</div>
   </section>`;
 }
 
