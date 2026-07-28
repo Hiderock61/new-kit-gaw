@@ -201,6 +201,62 @@ button { -webkit-tap-highlight-color: transparent; }
   -webkit-line-clamp: 2;
 }
 .statement-main .excerpt { -webkit-line-clamp: 3; }
+.profile-topic-list, .profile-statement-list {
+  display: grid;
+  gap: 7px;
+}
+.profile-topic-card, .profile-statement-card {
+  width: 100%;
+  border: 1px solid var(--color-border);
+  border-radius: 9px;
+  text-align: left;
+  cursor: pointer;
+}
+.profile-topic-card {
+  padding: 10px 12px;
+  background: var(--color-surface);
+  box-shadow: 0 1px 4px rgba(91, 61, 43, .04);
+}
+.profile-topic-title {
+  display: block;
+  font-weight: 700;
+  line-height: 1.4;
+}
+.profile-topic-excerpt {
+  display: -webkit-box;
+  margin-top: 4px;
+  color: var(--color-text-soft);
+  font-size: 13px;
+  line-height: 1.45;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.profile-statement-card {
+  padding: 10px 12px 11px;
+  border-left: 3px solid var(--color-border-strong);
+  background: var(--color-surface-soft);
+  box-shadow: none;
+}
+.profile-statement-topic {
+  display: block;
+  color: var(--color-primary-dark);
+  font-size: 12px;
+  line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.profile-statement-body {
+  display: -webkit-box;
+  margin-top: 5px;
+  font-size: 14px;
+  font-weight: 550;
+  line-height: 1.55;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
 .person-mini {
   width: 100%;
   min-height: 58px;
@@ -347,11 +403,13 @@ button { -webkit-tap-highlight-color: transparent; }
 
 @media (hover: hover) {
   .back-button:hover, .text-link:hover, .plain-link:hover { color: var(--color-primary); }
-  .home-community-card:hover, .list-item:hover, .topic-main:hover, .statement-main:hover, .detail-link:hover {
+  .home-community-card:hover, .profile-topic-card:hover, .profile-statement-card:hover,
+  .list-item:hover, .topic-main:hover, .statement-main:hover, .detail-link:hover {
     background: var(--color-surface-soft);
   }
 }
-.home-community-card:active, .list-item:active, .topic-main:active, .statement-main:active, .detail-link:active {
+.home-community-card:active, .profile-topic-card:active, .profile-statement-card:active,
+.list-item:active, .topic-main:active, .statement-main:active, .detail-link:active {
   background: var(--color-surface-soft);
 }
 

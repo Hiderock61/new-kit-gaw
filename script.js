@@ -272,6 +272,23 @@ function renderStatementItem(statementId, options = {}) {
     </button>
   </article>`;
 }
+function renderProfileTopicItem(topicId) {
+  const topic = getTopic(topicId);
+  if (!topic) return "";
+  return `<button class="profile-topic-card" data-action="open-topic" data-topic-id="${safe(topic.id)}">
+    <span class="profile-topic-title">${safe(topic.title)}</span>
+    <span class="profile-topic-excerpt">${safe(topic.body)}</span>
+  </button>`;
+}
+function renderProfileStatementItem(statementId) {
+  const statement = getStatement(statementId);
+  if (!statement) return "";
+  const topic = getTopic(statement.topicId);
+  return `<button class="profile-statement-card" data-action="open-statement" data-statement-id="${safe(statement.id)}">
+    <span class="profile-statement-topic">${safe(topic?.title || "元のトピック")}</span>
+    <span class="profile-statement-body">${safe(statement.body)}</span>
+  </button>`;
+}
 function renderEmptyState(text) {
   return `<div class="empty-state">${safe(text)}</div>`;
 }
@@ -343,9 +360,9 @@ function renderProfileDetail() {
     <div class="stack">${communities || renderEmptyState("所属コミュニティはありません。")}</div>
     ${profile.communityIds.length ? `<button class="text-link" data-action="open-profile-communities" data-profile-id="${safe(profile.id)}">所属している全コミュニティを見る ＞</button>` : ""}
     <h2 class="section-title">立てたトピック</h2>
-    <div class="stack">${topics.length ? topics.map(t => renderTopicItem(t.id, { staticAuthor:isSelf })).join("") : renderEmptyState("立てたトピックはありません。")}</div>
+    <div class="profile-topic-list">${topics.length ? topics.map(t => renderProfileTopicItem(t.id)).join("") : renderEmptyState("立てたトピックはありません。")}</div>
     <h2 class="section-title">残した発言</h2>
-    <div class="stack">${statements.length ? statements.map(s => renderStatementItem(s.id, { staticAuthor:isSelf })).join("") : renderEmptyState("残した発言はありません。")}</div>
+    <div class="profile-statement-list">${statements.length ? statements.map(s => renderProfileStatementItem(s.id)).join("") : renderEmptyState("残した発言はありません。")}</div>
   </section>`;
 }
 
