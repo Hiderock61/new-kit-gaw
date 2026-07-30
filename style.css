@@ -368,6 +368,20 @@ button { -webkit-tap-highlight-color: transparent; }
   font-size: 12px;
 }
 .viewer-switch p { margin: 0 0 4px; }
+.viewer-select-label {
+  display: block;
+  margin-top: 8px;
+}
+.viewer-select {
+  width: 100%;
+  min-height: 40px;
+  margin-top: 5px;
+  padding: 7px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: 7px;
+  background: var(--color-surface);
+  color: var(--color-text);
+}
 .viewer-switch button {
   min-height: 40px;
   padding: 7px 0;
