@@ -9,7 +9,7 @@ const profilesById = {
   yuu:{id:"yuu",name:"ユウ",bio:"古着屋を見ながら街を歩くのが好きです。販売の仕事をしています。休みの日は銭湯かライブハウスにいます。",communityIds:["vintage","liveHouse","photo","shimokita","salesBreak","sento","nightLife","chinese","festival","cafe"]},
   aki:{id:"aki",name:"アキ",bio:"郊外で小さな家庭菜園を続けています。在宅事務の合間に散歩をして、夜はホラー映画かボードゲームです。",communityIds:["garden","cooking","suburban","remoteWork","horror","boardGame","localShop","morningRun","diy","reading"]},
   kei:{id:"kei",name:"ケイ",bio:"営業の仕事で外を回ることが多いです。休日はフットサルかドライブ、一人で映画館や喫茶店にも行きます。",communityIds:["futsal","drive","salesBreak","soloCinema","cafe","movie","morningRun","chinese","localShop","festival","commute"]},
-  rina:{id:"rina",name:"リナ",bio:"通勤時間に本を読み、帰りに喫茶店へ寄ります。英語を学び直しながら、休日は音楽フェスや写真展へ出かけます。",communityIds:["reading","cafe","english","commute","festival","liveHouse","soloCinema","photo","localShop","boardGame"]},
+  rina:{id:"rina",name:"リナ",bio:"通勤時間に本を読み、帰りに喫茶店へ寄ります。英語を学び直しながら、休日は音楽フェスや写真展へ出かけます。",communityIds:["reading","cafe","english","commute","festival","liveHouse","soloCinema","photo","localShop","boardGame","horror"]},
   taku:{id:"taku",name:"タク",bio:"整備と修理の仕事をしています。バイクで町中華へ寄り、家では道具を直すか昔のゲームを遊んでいます。",communityIds:["bike","diy","chinese","repairWork","shiba","retroGame","drive","localShop","sento","monster","makers"]},
   emma:{id:"emma",name:"エマ",bio:"移動の多いフリーランスです。旅先で写真と地域の店を記録し、家に戻ると朝ランやボードゲームで生活を戻します。",communityIds:["soloTrip","photo","localShop","freelance","morningRun","boardGame","festival","cafe","suburban","remoteWork","english"]},
   shun:{id:"shun",name:"シュン",bio:"高円寺周辺で個人の仕事をしています。夜の方が作業しやすく、ゲームの合間に自炊します。たまに低山へ出ます。",communityIds:["monster","retroGame","remoteWork","nightLife","freelance","koenji","hiking","cooking","diy","soloCinema"]}
@@ -78,7 +78,7 @@ const contentSeed = [
   ["localOld","localShop","mayu","なくなってから気づいた店の役割","買い物以外で、その店が町に作っていたものを話してください。",[["emma","旅先の小さな文具店です。道を聞く人が何人も入り、案内所のようになっていました。"],["mayu","駅前の写真屋。現像を待つ人が立ち話をしていて、通りの時間を作っていました。"]]],
   ["bikeStop","bike","taku","目的地ではない寄り道で残った場所","走っている途中で止まった理由と、そこにあったものを話してください。",[["ren","川沿いの自販機です。風が変わったので止まり、そのまま十分くらい橋を見ていました。"],["taku","工具店の古い看板。閉店後でしたが、次の休みに戻って小さなレンチを買いました。"]]],
   ["morningStart","morningRun","sora","走り出すまでの手順","朝に外へ出るまで、選ぶことを減らす工夫を共有してください。",[["mayu","前日に靴下まで玄関近くへ置きます。朝に探す物がないと、そのまま外へ出られました。"],["emma","旅先では距離を決めません。靴を履いて角まで行き、体が動けば続けます。"]]],
-  ["horrorAfter","horror","aki","見終わった後まで残った怖さ","驚く場面ではなく、日常へ戻ってから思い出した場面を話してください。",[["aki","台所の音だけが続く映画です。翌朝に同じ音がして、場面の外側まで残っていたと気づきました。"],["aki","字幕のない無言の場面。帰りの電車で人の視線が気になり、そこから怖くなりました。"]]],
+  ["horrorAfter","horror","aki","見終わった後まで残った怖さ","驚く場面ではなく、日常へ戻ってから思い出した場面を話してください。",[["aki","台所の音だけが続く映画です。翌朝に同じ音がして、場面の外側まで残っていたと気づきました。"],["rina","字幕のない無言の場面。帰りの電車で人の視線が気になり、そこから怖くなりました。"]]],
   ["soloCinemaExit","soloCinema","kei","映画館を出た後に歩きたくなった作品","映画の内容と、帰り道で選んだ行動を話してください。",[["sora","小さな町を歩く映画です。すぐ電車へ乗らず、二駅分だけ商店街を歩きました。"],["shun","夜の街が長く映る作品。深夜上映の後、明るい大通りではなく裏道を選びました。"]]],
   ["makersFinish","makers","mio","完成と決める最後の確認","作り続けずに手を止めるため、最後に何を見ていますか。",[["mio","離れて全体の輪郭を見ます。細部より、最初に決めた形が残っていれば終わりにします。"],["taku","使う動作を一回通します。道具なら持って戻せるところまで確認して完成です。"]]],
   ["englishReturn","english","rina","学び直しで先に捨てたこと","続けるために、やらないと決めた勉強法はありますか。",[["emma","毎日同じ時間に座ることです。移動が多いので、短くても場所ごとに続ける方へ変えました。"],["rina","単語帳を最初から完璧にすること。通勤中に出会った言葉だけ残しています。"]]],
