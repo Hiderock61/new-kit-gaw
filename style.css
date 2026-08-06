@@ -435,3 +435,29 @@ button { -webkit-tap-highlight-color: transparent; }
 @media (prefers-reduced-motion: reduce) {
   * { scroll-behavior: auto !important; transition: none !important; }
 }
+
+/* ===== Stage 15: HOME self-card white + blue border test ===== */
+:root {
+  --color-home-profile-border: #3568c8;
+  --color-home-profile-link: #2f5fb8;
+  --color-home-profile-bg: #ffffff;
+}
+
+.self-card {
+  background: var(--color-home-profile-bg);
+  border: 2px solid var(--color-home-profile-border);
+  box-shadow: none;
+}
+
+.self-card .chevron {
+  color: var(--color-home-profile-link);
+}
+
+.self-card:focus-visible {
+  outline: 3px solid rgba(53, 104, 200, 0.24);
+  outline-offset: 3px;
+}
+
+.self-card:active {
+  background: #f8fbff;
+}
