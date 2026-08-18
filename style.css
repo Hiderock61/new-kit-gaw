@@ -461,3 +461,95 @@ button { -webkit-tap-highlight-color: transparent; }
 .self-card:active {
   background: #f8fbff;
 }
+
+
+/* ===== Stage 16 pilot: brand UI (HOME + footprints + paw) ===== */
+:root {
+  --brand-bg: #f7f5f0;
+  --brand-card: #ffffff;
+  --brand-text: #2b2623;
+  --brand-blue: #2a52be;
+  --brand-blue-soft: #eef3ff;
+  --brand-terra: #d96b43;
+  --brand-muted: #8c857b;
+  --brand-line: #e0dcd5;
+}
+
+/* Pilot only: keep the app structure, refresh the HOME surface. */
+.screen:has(.app-title) {
+  color: var(--brand-text);
+}
+.app-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--brand-text);
+  letter-spacing: .005em;
+}
+.app-title::after {
+  content: "🐾";
+  font-size: .7em;
+  line-height: 1;
+  transform: translateY(-1px);
+}
+
+/* White-paper card with ink-blue navigation cue. */
+.self-card {
+  border-color: var(--brand-line);
+  border-left: 3px solid var(--brand-blue);
+  background: var(--brand-card);
+  box-shadow: none;
+}
+.self-card .chevron { color: var(--brand-blue); }
+
+/* HOME: links become one consistent ink-blue. */
+.screen:has(.app-title) .text-link,
+.screen:has(.app-title) .plain-link {
+  color: var(--brand-blue);
+}
+.screen:has(.app-title) .home-community-card {
+  border-color: var(--brand-line);
+  background: var(--brand-card);
+}
+.screen:has(.app-title) .home-community-description,
+.screen:has(.app-title) .meta {
+  color: var(--brand-muted);
+}
+
+/* The first HOME section is the footprint entrance. */
+.app-title + .self-card + .section-title::before {
+  content: "🐾 ";
+  color: var(--brand-terra);
+}
+
+/* Footprint screen: brand cue without turning it into a pet UI. */
+.screen:has(.footprint-item) .screen-title::before {
+  content: "🐾 ";
+  color: var(--brand-terra);
+}
+.screen:has(.footprint-item) .count { color: var(--brand-muted); }
+.screen:has(.footprint-item) .footprint-item {
+  border-color: var(--brand-line);
+  background: var(--brand-card);
+  box-shadow: none;
+}
+.screen:has(.footprint-item) .footprint-item .chevron {
+  color: var(--brand-blue);
+}
+
+/* Footprint feedback: a single transient paw is safe and memorable. */
+.toast {
+  background: var(--brand-blue);
+  color: #ffffff;
+  box-shadow: 0 8px 24px rgba(42, 82, 190, .18);
+}
+.toast::before {
+  content: "🐾 ";
+}
+
+@media (hover: hover) {
+  .screen:has(.app-title) .home-community-card:hover,
+  .screen:has(.footprint-item) .footprint-item:hover {
+    background: var(--brand-blue-soft);
+  }
+}
