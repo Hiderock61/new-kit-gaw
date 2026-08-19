@@ -1,1 +1,183 @@
-PLACEHOLDER
+/* New Kit Gaw — Stage 19: HOME world-density pass
+   Keep the functions untouched. Make HOME feel like a small town the mascot wanders through. */
+
+.screen:has(.app-title) {
+  position: relative;
+}
+
+/* The header should feel inhabited, not like a blank title block. */
+.screen:has(.app-title) .app-title {
+  min-height: 112px;
+  margin-bottom: 12px;
+  padding: 12px 168px 0 0;
+  line-height: 1.04;
+}
+.screen:has(.app-title) .app-title::before {
+  top: -8px !important;
+  right: -10px !important;
+  width: 174px !important;
+  height: 116px !important;
+  border-radius: 0 !important;
+  background-size: cover !important;
+  background-position: center 42% !important;
+  background-repeat: no-repeat !important;
+  box-shadow: none !important;
+}
+.screen:has(.app-title) .app-title::after {
+  position: relative;
+  z-index: 2;
+}
+.screen:has(.app-title)::before {
+  content: "dig people, things, stories.";
+  position: absolute;
+  z-index: 4;
+  left: 2px;
+  top: 53px;
+  color: #896f5e;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: .045em;
+  pointer-events: none;
+}
+
+/* Footprints become a scene. The old pilot crop is zoomed in and given room to breathe. */
+.app-title + .self-card + .section-title {
+  position: relative;
+  min-height: 92px;
+  margin-top: 20px;
+  margin-bottom: 2px;
+  padding-top: 18px;
+}
+.app-title + .self-card + .section-title::after {
+  right: -4px !important;
+  top: 4px !important;
+  width: 230px !important;
+  height: 88px !important;
+  border-radius: 0 !important;
+  background-size: cover !important;
+  background-position: right center !important;
+  background-repeat: no-repeat !important;
+  box-shadow: none !important;
+}
+.app-title + .self-card + .section-title + .text-link {
+  margin-top: -6px;
+}
+
+/* The community entrance gets a small editorial voice. */
+.section-title:has(+ .home-community-list) {
+  position: relative;
+  padding-right: 132px;
+}
+.section-title:has(+ .home-community-list)::before {
+  content: "⌂ ";
+  color: var(--gaw-orange);
+}
+.section-title:has(+ .home-community-list)::after {
+  content: "どの街に寄ろうかな…";
+  position: absolute;
+  top: 1px;
+  right: 0;
+  padding: 5px 8px;
+  border: 1px solid #e8cba4;
+  border-radius: 999px;
+  background: rgba(255,255,255,.86);
+  color: #7b6250;
+  font-size: 9px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* Community cards feel like street signs rather than a settings list. */
+.home-community-card {
+  min-height: 70px;
+  border-color: #e5d8c8;
+  box-shadow: 0 5px 16px rgba(93, 69, 46, .075);
+}
+.home-community-card:nth-child(1),
+.home-community-card:nth-child(2) {
+  min-height: 78px;
+  padding-right: 86px;
+}
+.home-community-card:nth-child(1) .home-community-description::after {
+  content: "  🐩🍿";
+  color: #b96c45;
+  font-size: 13px;
+}
+.home-community-card:nth-child(2) .home-community-description::after {
+  content: "  🐩🍜";
+  color: #b96c45;
+  font-size: 13px;
+}
+.home-community-card:nth-child(1) {
+  background: linear-gradient(90deg, #fff 0%, #fff 72%, #fff6ef 100%);
+}
+.home-community-card:nth-child(2) {
+  background: linear-gradient(90deg, #fff 0%, #fff 72%, #fff8e7 100%);
+}
+.home-community-card:nth-child(3) {
+  background: linear-gradient(90deg, #fff 0%, #fff 82%, #f2fbf6 100%);
+}
+.home-community-card:nth-child(4) {
+  background: linear-gradient(90deg, #fff 0%, #fff 82%, #f3f7ff 100%);
+}
+
+/* A little trail between the town and the utility links. */
+.screen:has(.app-title) .home-community-list + .text-link {
+  position: relative;
+}
+.screen:has(.app-title) .home-community-list + .text-link::after {
+  content: "🐾  ·  🐾";
+  position: absolute;
+  right: 5px;
+  bottom: 11px;
+  color: #efb78e;
+  font-size: 10px;
+  letter-spacing: 1px;
+  pointer-events: none;
+}
+
+/* Demo block: make the resting mascot large enough to read as a character. */
+.screen:has(.app-title) .viewer-switch {
+  min-height: 112px;
+  padding-right: 142px;
+  background-color: rgba(255, 248, 230, .82);
+}
+.screen:has(.app-title) .viewer-switch::after,
+.screen:has(.app-title) .viewer-switch::before {
+  background-size: cover !important;
+  background-position: center !important;
+}
+
+/* Give the page a quieter illustrated-paper rhythm between scenes. */
+.screen:has(.app-title) .text-link {
+  border-color: #e6d8c6;
+}
+.screen:has(.app-title) .self-card {
+  box-shadow: 0 6px 20px rgba(78, 59, 43, .09);
+}
+
+@media (max-width: 375px) {
+  .screen:has(.app-title) .app-title {
+    min-height: 103px;
+    padding-right: 145px;
+    font-size: 25px;
+  }
+  .screen:has(.app-title) .app-title::before {
+    width: 150px !important;
+    height: 104px !important;
+  }
+  .screen:has(.app-title)::before {
+    top: 50px;
+    font-size: 9.5px;
+  }
+  .section-title:has(+ .home-community-list) {
+    padding-right: 0;
+  }
+  .section-title:has(+ .home-community-list)::after {
+    display: none;
+  }
+  .home-community-card:nth-child(1),
+  .home-community-card:nth-child(2) {
+    padding-right: 46px;
+  }
+}
