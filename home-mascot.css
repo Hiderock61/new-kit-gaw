@@ -1,0 +1,140 @@
+/* New Kit Gaw — Stage 21: independent mascot placement on HOME only.
+   The app structure and interactions stay untouched. */
+
+/* Header mascot: independent transparent art, never a rectangular crop. */
+.screen:has(.app-title) .app-title {
+  position: relative;
+  min-height: 92px;
+  margin-bottom: 10px;
+  padding: 14px 126px 0 0;
+  line-height: 1.05;
+  white-space: nowrap;
+}
+.screen:has(.app-title) .app-title::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  top: -8px;
+  right: -2px;
+  width: 118px;
+  height: 110px;
+  background: url("assets/gaw-skate.webp") center / contain no-repeat;
+  pointer-events: none;
+}
+.screen:has(.app-title) .app-title::after {
+  position: relative;
+  z-index: 2;
+}
+
+/* The current-user card gets the resting Gaw without replacing any controls. */
+.screen:has(.app-title) .self-card {
+  position: relative;
+  min-height: 96px;
+  padding-right: 86px;
+  overflow: visible;
+}
+.screen:has(.app-title) .self-card::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  right: 5px;
+  bottom: -3px;
+  width: 82px;
+  height: 72px;
+  background: url("assets/gaw-rest.webp") center bottom / contain no-repeat;
+  pointer-events: none;
+}
+.screen:has(.app-title) .self-card .avatar,
+.screen:has(.app-title) .self-card .self-card__body,
+.screen:has(.app-title) .self-card .chevron {
+  position: relative;
+  z-index: 2;
+}
+.screen:has(.app-title) .self-card .chevron {
+  max-width: 118px;
+  font-size: 14px;
+  line-height: 1.35;
+}
+
+/* Footprints become a small scene: the non-sunglasses Gaw is actually sniffing. */
+.screen:has(.app-title) .app-title + .self-card + .section-title {
+  position: relative;
+  min-height: 82px;
+  margin-top: 20px;
+  margin-bottom: 0;
+  padding-top: 22px;
+  padding-right: 98px;
+}
+.screen:has(.app-title) .app-title + .self-card + .section-title::after {
+  content: "";
+  position: absolute;
+  right: 2px;
+  bottom: -3px;
+  width: 94px;
+  height: 82px;
+  background: url("assets/gaw-sniff.webp") center bottom / contain no-repeat;
+  pointer-events: none;
+}
+.screen:has(.app-title) .app-title + .self-card + .section-title + .text-link {
+  margin-top: -10px;
+}
+
+/* A restrained paw trail connects the footprint scene to the town below. */
+.screen:has(.app-title) .app-title + .self-card + .section-title + .text-link {
+  position: relative;
+}
+.screen:has(.app-title) .app-title + .self-card + .section-title + .text-link::after {
+  content: "·  🐾  ·  🐾";
+  position: absolute;
+  right: 4px;
+  bottom: 13px;
+  color: rgba(255, 138, 76, .55);
+  font-size: 10px;
+  letter-spacing: 1px;
+  pointer-events: none;
+}
+
+/* Keep the community cards as the content, not as a mascot gallery. */
+.screen:has(.app-title) .home-community-card {
+  isolation: isolate;
+}
+
+@media (max-width: 375px) {
+  .screen:has(.app-title) .app-title {
+    min-height: 84px;
+    padding-right: 108px;
+    font-size: 25px;
+  }
+  .screen:has(.app-title) .app-title::before {
+    width: 104px;
+    height: 98px;
+  }
+  .screen:has(.app-title) .self-card {
+    min-height: 92px;
+    padding-right: 74px;
+  }
+  .screen:has(.app-title) .self-card::after {
+    width: 70px;
+    height: 64px;
+  }
+  .screen:has(.app-title) .self-card .chevron {
+    max-width: 96px;
+    font-size: 13px;
+  }
+  .screen:has(.app-title) .app-title + .self-card + .section-title {
+    min-height: 76px;
+    padding-right: 86px;
+  }
+  .screen:has(.app-title) .app-title + .self-card + .section-title::after {
+    width: 82px;
+    height: 72px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .screen:has(.app-title) .app-title::before,
+  .screen:has(.app-title) .self-card::after,
+  .screen:has(.app-title) .app-title + .self-card + .section-title::after {
+    animation: none;
+  }
+}
