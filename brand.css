@@ -1,0 +1,255 @@
+/* New Kit Gaw — Stage 17: brand UI rules + all-screen rollout */
+
+:root {
+  --color-bg: #fff6ec;
+  --color-surface: #ffffff;
+  --color-surface-soft: #fff0dc;
+  --color-primary: #ff8a4c;
+  --color-primary-dark: #5a3828;
+  --color-accent: #ffd272;
+  --color-text: #30251f;
+  --color-text-soft: #7f6d62;
+  --color-border: #eadfce;
+  --color-border-strong: #d7b992;
+  --color-success-bg: #fff0bd;
+  --color-toast-bg: #2f6db2;
+  --color-toast-text: #ffffff;
+  --radius: 12px;
+  --shadow-soft: 0 4px 14px rgba(103, 75, 49, .08);
+
+  --gaw-blue: #2f6db2;
+  --gaw-blue-soft: #eaf3ff;
+  --gaw-orange: #ff8a4c;
+  --gaw-yellow: #ffd272;
+  --gaw-mint: #bfead6;
+  --gaw-peach: #ffd9c7;
+  --gaw-sky: #d7e8ff;
+  --gaw-ink: #30251f;
+  --gaw-paper: #ffffff;
+  --gaw-cream: #fff6ec;
+}
+
+html, body {
+  background: var(--gaw-cream);
+}
+
+body {
+  color: var(--gaw-ink);
+}
+
+.app-shell {
+  background:
+    radial-gradient(circle at 92% 7%, rgba(255, 210, 114, .22) 0 34px, transparent 35px),
+    radial-gradient(circle at 6% 24%, rgba(255, 138, 76, .10) 0 42px, transparent 43px),
+    radial-gradient(circle at 96% 54%, rgba(191, 234, 214, .18) 0 38px, transparent 39px),
+    linear-gradient(180deg, #fffaf3 0%, #fff6ec 100%);
+}
+
+/* Editorial title language */
+.app-title {
+  margin-bottom: 18px;
+  font-size: 27px;
+  font-weight: 800;
+  letter-spacing: -.015em;
+}
+.app-title::after {
+  content: "🐾";
+  color: var(--gaw-orange);
+  filter: saturate(.9);
+}
+
+.screen-title,
+.section-title,
+.subheading {
+  color: var(--gaw-ink);
+}
+.section-title {
+  letter-spacing: .01em;
+}
+
+/* Navigation color language */
+.text-link,
+.plain-link,
+.detail-link,
+.self-card .chevron,
+.footprint-item .chevron {
+  color: var(--gaw-blue);
+}
+.back-button {
+  color: #8b684f;
+}
+
+/* Shared paper cards */
+.card,
+.list-item,
+.statement-card,
+.topic-card,
+.profile-topic-card,
+.profile-statement-card,
+.detail-link,
+.footprint-item,
+.home-community-card {
+  border-color: var(--color-border);
+  background: var(--gaw-paper);
+  box-shadow: var(--shadow-soft);
+}
+
+/* Current-user card keeps the blue navigation rail */
+.self-card {
+  border: 1px solid var(--color-border);
+  border-left: 4px solid var(--gaw-blue);
+  border-radius: 14px;
+  background: var(--gaw-paper);
+  box-shadow: 0 5px 18px rgba(76, 62, 47, .08);
+}
+.avatar {
+  border-color: #e9c7a8;
+  background: linear-gradient(145deg, #fff0dc, #ffe0cf);
+  color: #7d4427;
+}
+
+/* HOME gets the playful community “street-sign” treatment. */
+.home-community-list {
+  gap: 8px;
+}
+.home-community-card {
+  position: relative;
+  min-height: 64px;
+  padding: 10px 34px 10px 62px;
+  overflow: hidden;
+  border-radius: 12px;
+  transition: transform .14s ease, box-shadow .14s ease, background .14s ease;
+}
+.home-community-card::before {
+  position: absolute;
+  left: 11px;
+  top: 50%;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 20px;
+  transform: translateY(-50%);
+  content: "✦";
+}
+.home-community-card::after {
+  content: "›";
+  position: absolute;
+  right: 13px;
+  top: 50%;
+  color: #8a6349;
+  font-size: 27px;
+  font-weight: 400;
+  transform: translateY(-53%);
+}
+.home-community-card:nth-child(1)::before { content: "🎬"; background: var(--gaw-peach); }
+.home-community-card:nth-child(2)::before { content: "🍜"; background: #ffe4a8; }
+.home-community-card:nth-child(3)::before { content: "👟"; background: var(--gaw-mint); }
+.home-community-card:nth-child(4)::before { content: "💻"; background: var(--gaw-sky); }
+.home-community-name {
+  font-size: 15px;
+  color: var(--gaw-ink);
+}
+.home-community-description {
+  color: var(--color-text-soft);
+  font-size: 12px;
+}
+
+/* Footprints are the mascot/brand moment, without turning every screen into a pet UI. */
+.app-title + .self-card + .section-title::before,
+.screen:has(.footprint-item) .screen-title::before {
+  content: "🐾 ";
+  color: var(--gaw-orange);
+}
+.footprint-item {
+  border-radius: 12px;
+}
+.toast {
+  background: var(--gaw-blue);
+  color: #fff;
+  box-shadow: 0 8px 24px rgba(47, 109, 178, .20);
+}
+.toast::before {
+  content: "🐾 ";
+}
+
+/* Profile activity stays readable but gains a little magazine rhythm. */
+.profile-topic-card {
+  border-left: 3px solid var(--gaw-blue);
+  background: #fff;
+}
+.profile-statement-card {
+  border-left: 3px solid var(--gaw-orange);
+  background: #fff9f2;
+}
+.profile-statement-topic {
+  color: #a95b33;
+}
+
+/* Context, filters and empty states */
+.context-banner {
+  border-color: #efd2ab;
+  background: #fff4df;
+}
+.search-field {
+  border-color: #e6d9c9;
+  background: #fffdf9;
+}
+.category-button {
+  border-color: #eadfce;
+  background: #fff8ef;
+}
+.category-button.is-active {
+  border-color: var(--gaw-blue);
+  background: var(--gaw-blue);
+  color: #fff;
+}
+.status-label {
+  border-color: #e7c98b;
+  background: #fff0bd;
+  color: #7b5621;
+}
+.empty-state {
+  border-color: #dfc7aa;
+  background: rgba(255,255,255,.44);
+}
+
+/* Demo-only area stays visibly secondary. */
+.viewer-switch {
+  border-color: #efb866;
+  background: rgba(255, 248, 230, .78);
+  color: #7c6b5f;
+}
+.viewer-select {
+  border-color: #e8d9c4;
+  background: #fff;
+}
+
+/* Light touch interactions. */
+.home-community-card:active,
+.list-item:active,
+.topic-main:active,
+.statement-main:active,
+.profile-topic-card:active,
+.profile-statement-card:active,
+.detail-link:active {
+  background: #fff5e7;
+}
+
+@media (hover: hover) {
+  .home-community-card:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 7px 18px rgba(103, 75, 49, .11);
+    background: #fffdf9;
+  }
+  .text-link:hover,
+  .plain-link:hover,
+  .detail-link:hover {
+    color: #1f5d9f;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-community-card { transition: none; }
+}
