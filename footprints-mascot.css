@@ -1,0 +1,117 @@
+/* New Kit Gaw — Stage 29: Footprints scene.
+   Footprints are Click's strongest semantic scene: trace, presence, and quiet discovery. */
+
+/* Non-empty footprint screen: one sniffing Click in the heading area. */
+.screen:has(.footprint-item) .screen-title {
+  position: relative;
+  min-height: 88px;
+  margin-bottom: 0;
+  padding-top: 18px;
+  padding-right: 112px;
+}
+.screen:has(.footprint-item) .screen-title::after {
+  content: "";
+  position: absolute;
+  right: 2px;
+  bottom: -4px;
+  width: 96px;
+  height: 82px;
+  background: url("assets/gaw-sniff.webp") center bottom / contain no-repeat;
+  pointer-events: none;
+}
+
+/* The count becomes a quiet trail marker rather than another mascot scene. */
+.screen:has(.footprint-item) > .count {
+  position: relative;
+  min-height: 28px;
+  margin-top: 0;
+  margin-bottom: 16px;
+  padding-right: 112px;
+}
+.screen:has(.footprint-item) > .count::after {
+  content: "🐾  ·  🐾  ·  🐾";
+  position: absolute;
+  right: 5px;
+  top: 1px;
+  color: rgba(255, 138, 76, .50);
+  font-size: 10px;
+  letter-spacing: 1px;
+  pointer-events: none;
+}
+
+/* Footprint cards read as a trail. The newest visit is slightly warmer. */
+.screen:has(.footprint-item) .stack {
+  position: relative;
+}
+.screen:has(.footprint-item) .footprint-item {
+  position: relative;
+  min-height: 72px;
+}
+.screen:has(.footprint-item) .footprint-item:first-child {
+  border-left: 3px solid var(--gaw-orange, #ff8a4c);
+  background: #fffaf4;
+}
+.screen:has(.footprint-item) .footprint-item:first-child .meta {
+  color: #a95b33;
+  font-weight: 650;
+}
+.screen:has(.footprint-item) .footprint-item:not(:last-child)::after {
+  content: "·  🐾";
+  position: absolute;
+  z-index: 3;
+  left: 19px;
+  bottom: -13px;
+  color: rgba(255, 138, 76, .42);
+  font-size: 9px;
+  letter-spacing: 1px;
+  pointer-events: none;
+}
+.screen:has(.footprint-item) .stack {
+  gap: 16px;
+}
+
+/* Zero-state fallback for counted empty lists.
+   In the current demo structure this covers the footprint zero state without JS changes.
+   Click waits quietly; no new tap target is introduced. */
+.screen:has(> .back-header + .screen-title + .count + .stack > .empty-state:only-child)
+  > .stack > .empty-state:only-child {
+  position: relative;
+  min-height: 122px;
+  padding-right: 104px;
+}
+.screen:has(> .back-header + .screen-title + .count + .stack > .empty-state:only-child)
+  > .stack > .empty-state:only-child::after {
+  content: "";
+  position: absolute;
+  right: 12px;
+  bottom: 10px;
+  width: 76px;
+  height: 72px;
+  background: url("assets/click-home.webp") center bottom / contain no-repeat;
+  opacity: .92;
+  pointer-events: none;
+}
+
+@media (max-width: 375px) {
+  .screen:has(.footprint-item) .screen-title {
+    min-height: 80px;
+    padding-right: 98px;
+  }
+  .screen:has(.footprint-item) .screen-title::after {
+    width: 84px;
+    height: 72px;
+  }
+  .screen:has(.footprint-item) > .count {
+    padding-right: 98px;
+  }
+  .screen:has(> .back-header + .screen-title + .count + .stack > .empty-state:only-child)
+    > .stack > .empty-state:only-child {
+    min-height: 112px;
+    padding-right: 92px;
+  }
+  .screen:has(> .back-header + .screen-title + .count + .stack > .empty-state:only-child)
+    > .stack > .empty-state:only-child::after {
+    width: 68px;
+    height: 64px;
+  }
+}
