@@ -1,0 +1,138 @@
+/* New Kit Gaw — Stage 33: town / street atmosphere.
+   Keep the layer faint. Cards and information stay visually dominant;
+   the town should be noticed after a moment, not before the content. */
+
+:root {
+  --town-blue-line: rgba(47, 109, 178, .045);
+  --town-warm-line: rgba(255, 138, 76, .042);
+  --town-ink-line: rgba(48, 37, 31, .026);
+  --town-trace: rgba(255, 138, 76, .075);
+}
+
+/* A very light street-map layer lives only in whitespace.
+   Opaque cards naturally cover it, so information remains clean. */
+.app-shell {
+  background-color: var(--color-surface, #fffdf8);
+  background-image:
+    linear-gradient(112deg,
+      transparent 0 27%,
+      var(--town-blue-line) 27.15% 27.45%,
+      transparent 27.6% 100%),
+    linear-gradient(68deg,
+      transparent 0 72%,
+      var(--town-warm-line) 72.12% 72.42%,
+      transparent 72.58% 100%),
+    linear-gradient(90deg,
+      transparent 0 8%,
+      var(--town-ink-line) 8.1% 8.35%,
+      transparent 8.45% 91.5%,
+      var(--town-ink-line) 91.65% 91.9%,
+      transparent 92% 100%),
+    radial-gradient(circle at 91% 18%, var(--town-trace) 0 1.6px, transparent 1.9px),
+    radial-gradient(circle at 87% 23%, var(--town-trace) 0 1.3px, transparent 1.6px);
+  background-size:
+    100% 620px,
+    100% 760px,
+    100% 100%,
+    118px 260px,
+    118px 260px;
+  background-position:
+    center 40px,
+    center 220px,
+    center top,
+    right 34px top 120px,
+    right 34px top 120px;
+  background-repeat:
+    repeat-y,
+    repeat-y,
+    no-repeat,
+    repeat-y,
+    repeat-y;
+}
+
+/* Soft edge shadows imply blocks/buildings without drawing literal scenery. */
+.app-shell {
+  box-shadow:
+    inset 7px 0 0 rgba(48, 37, 31, .012),
+    inset -7px 0 0 rgba(48, 37, 31, .012);
+}
+
+/* Back headers act like tiny street corners. */
+.back-header {
+  position: relative;
+}
+.back-header::after {
+  content: "";
+  position: absolute;
+  right: 3px;
+  bottom: -1px;
+  width: 34px;
+  height: 7px;
+  border-top: 1px solid rgba(47, 109, 178, .13);
+  border-right: 1px solid rgba(47, 109, 178, .13);
+  border-radius: 0 5px 0 0;
+  pointer-events: none;
+}
+
+/* Community pages get a faint district block at the edge.
+   This sits behind content and inherits the Stage 32 category accent. */
+.community-world {
+  background-image:
+    linear-gradient(90deg,
+      transparent 0 93%,
+      color-mix(in srgb, var(--community-accent, #d7b992) 5%, transparent) 93% 100%);
+  background-repeat: no-repeat;
+}
+
+/* A tiny route mark near the community sign. It is deliberately not another Click. */
+.community-world > .screen-title {
+  position: relative;
+}
+.community-world > .screen-title::after {
+  opacity: .94;
+}
+.community-world > .body-copy::after {
+  content: "·  ·  ·";
+  display: block;
+  width: fit-content;
+  margin: 7px 3px 0 auto;
+  color: color-mix(in srgb, var(--community-accent, #d7b992) 32%, transparent);
+  font-size: 9px;
+  letter-spacing: 4px;
+  pointer-events: none;
+}
+
+/* Footprints already use literal paws in Stage 29.
+   Here we only soften the surrounding route so the dedicated scene remains special. */
+.screen:has(.footprint-item) {
+  background-image:
+    linear-gradient(90deg,
+      transparent 0 20px,
+      rgba(255, 138, 76, .035) 20px 21px,
+      transparent 21px 100%);
+  background-repeat: no-repeat;
+}
+
+/* On narrow iPhones, reduce the map layer further so gutters do not become busy. */
+@media (max-width: 375px) {
+  :root {
+    --town-blue-line: rgba(47, 109, 178, .034);
+    --town-warm-line: rgba(255, 138, 76, .032);
+    --town-ink-line: rgba(48, 37, 31, .020);
+    --town-trace: rgba(255, 138, 76, .058);
+  }
+
+  .app-shell {
+    background-size:
+      100% 660px,
+      100% 800px,
+      100% 100%,
+      126px 280px,
+      126px 280px;
+  }
+
+  .back-header::after {
+    width: 28px;
+    opacity: .8;
+  }
+}
