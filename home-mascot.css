@@ -1,7 +1,21 @@
-/* New Kit Gaw — Stage 25: HOME community-card mascot pilot.
-   Keep the information icon, then add Click only to the first two cards. */
+/* New Kit Gaw — Stage 26: Click component sizing contract.
+   Visual behavior stays the same; mascot dimensions and clear space are now reusable tokens. */
 
-/* 1) Header: movement cue. */
+:root {
+  --click-move-w: 118px;
+  --click-move-h: 110px;
+  --click-sniff-w: 94px;
+  --click-sniff-h: 82px;
+  --click-card-w: 62px;
+  --click-card-h: 58px;
+  --click-rest-w: 82px;
+  --click-rest-h: 72px;
+  --click-box-w: 76px;
+  --click-box-h: 82px;
+  --click-clear-text: 12px;
+}
+
+/* 1) click-move: HOME header movement cue. */
 .screen:has(.app-title) .app-title {
   position: relative;
   min-height: 96px;
@@ -16,8 +30,8 @@
   z-index: 1;
   top: 5px;
   right: -2px;
-  width: 118px;
-  height: 110px;
+  width: var(--click-move-w);
+  height: var(--click-move-h);
   background: url("assets/gaw-skate.webp") center / contain no-repeat;
   pointer-events: none;
 }
@@ -45,22 +59,22 @@
   white-space: nowrap;
 }
 
-/* 2) Footprints: keep the strongest functional match. */
+/* 2) click-sniff: strongest functional match for footprints. */
 .screen:has(.app-title) .app-title + .self-card + .section-title {
   position: relative;
   min-height: 82px;
   margin-top: 30px;
   margin-bottom: 0;
   padding-top: 22px;
-  padding-right: 98px;
+  padding-right: calc(var(--click-sniff-w) + var(--click-clear-text));
 }
 .screen:has(.app-title) .app-title + .self-card + .section-title::after {
   content: "";
   position: absolute;
   right: 2px;
   bottom: -3px;
-  width: 94px;
-  height: 82px;
+  width: var(--click-sniff-w);
+  height: var(--click-sniff-h);
   background: url("assets/gaw-sniff.webp") center bottom / contain no-repeat;
   pointer-events: none;
 }
@@ -80,15 +94,15 @@
 }
 
 /* 3) Community-card pilot.
-   The left pictogram remains the fast category cue.
-   Click uses spare space on the right and never becomes the tap target. */
+   Left pictogram = information. Right Click = atmosphere.
+   Dedicated movie/food assets are still pending; these remain temporary role substitutes. */
 .screen:has(.app-title) .home-community-card {
   isolation: isolate;
 }
 .screen:has(.app-title) .home-community-card:nth-child(1),
 .screen:has(.app-title) .home-community-card:nth-child(2) {
   min-height: 76px;
-  padding-right: 94px;
+  padding-right: calc(var(--click-card-w) + 32px);
 }
 .screen:has(.app-title) .home-community-card:nth-child(1) .home-community-description,
 .screen:has(.app-title) .home-community-card:nth-child(2) .home-community-description {
@@ -100,46 +114,46 @@
   content: "";
   position: absolute;
   z-index: 1;
-  right: -74px;
+  right: calc(-1 * (var(--click-card-w) + var(--click-clear-text)));
   bottom: -7px;
-  width: 62px;
-  height: 58px;
+  width: var(--click-card-w);
+  height: var(--click-card-h);
   background-position: center bottom;
   background-size: contain;
   background-repeat: no-repeat;
   pointer-events: none;
 }
-/* Movie pilot: laptop pose reads as "watching / browsing" until a popcorn pose arrives. */
+/* Temporary click-work / watch role. */
 .screen:has(.app-title) .home-community-card:nth-child(1) .home-community-description::after {
   background-image: url("assets/click-community.webp");
 }
-/* Town-Chinese pilot: sniffing pose reads as "finding a place / following a scent". */
+/* Temporary discovery role until dedicated click-food exists. */
 .screen:has(.app-title) .home-community-card:nth-child(2) .home-community-description::after {
   background-image: url("assets/gaw-sniff.webp");
 }
 
-/* 4) Lower HOME: rest mode beside Explore. */
+/* 4) click-rest: lower HOME encounter beside Explore. */
 .screen:has(.app-title) .text-link:has(+ .viewer-switch) {
   position: relative;
   min-height: 82px;
-  padding-right: 96px;
+  padding-right: calc(var(--click-rest-w) + 14px);
 }
 .screen:has(.app-title) .text-link:has(+ .viewer-switch)::after {
   content: "";
   position: absolute;
   right: 6px;
   bottom: 3px;
-  width: 82px;
-  height: 72px;
+  width: var(--click-rest-w);
+  height: var(--click-rest-h);
   background: url("assets/gaw-rest.webp") center bottom / contain no-repeat;
   pointer-events: none;
 }
 
-/* Validation remains test-only and visually secondary. */
+/* click-box: test-only / backstage role. */
 .screen:has(.app-title) .viewer-switch {
   position: relative;
   min-height: 100px;
-  padding-right: 92px;
+  padding-right: calc(var(--click-box-w) + 16px);
   overflow: hidden;
 }
 .screen:has(.app-title) .viewer-switch::after {
@@ -147,17 +161,31 @@
   position: absolute;
   right: 6px;
   bottom: 3px;
-  width: 76px;
-  height: 82px;
+  width: var(--click-box-w);
+  height: var(--click-box-h);
   background-image: url("assets/click-box.webp");
   background-repeat: no-repeat;
   background-position: left bottom;
-  background-size: auto 82px;
+  background-size: auto var(--click-box-h);
   opacity: .72;
   pointer-events: none;
 }
 
 @media (max-width: 375px) {
+  :root {
+    --click-move-w: 104px;
+    --click-move-h: 98px;
+    --click-sniff-w: 82px;
+    --click-sniff-h: 72px;
+    --click-card-w: 56px;
+    --click-card-h: 52px;
+    --click-rest-w: 72px;
+    --click-rest-h: 64px;
+    --click-box-w: 68px;
+    --click-box-h: 74px;
+    --click-clear-text: 10px;
+  }
+
   .screen:has(.app-title) .app-title {
     min-height: 90px;
     padding-right: 108px;
@@ -165,8 +193,6 @@
   }
   .screen:has(.app-title) .app-title::before {
     top: 6px;
-    width: 104px;
-    height: 98px;
   }
   .screen:has(.app-title) .self-card {
     min-height: 82px;
@@ -179,37 +205,21 @@
   .screen:has(.app-title) .app-title + .self-card + .section-title {
     min-height: 76px;
     margin-top: 26px;
-    padding-right: 86px;
-  }
-  .screen:has(.app-title) .app-title + .self-card + .section-title::after {
-    width: 82px;
-    height: 72px;
   }
   .screen:has(.app-title) .home-community-card:nth-child(1),
   .screen:has(.app-title) .home-community-card:nth-child(2) {
     min-height: 72px;
-    padding-right: 84px;
+    padding-right: calc(var(--click-card-w) + 28px);
   }
   .screen:has(.app-title) .home-community-card:nth-child(1) .home-community-description::after,
   .screen:has(.app-title) .home-community-card:nth-child(2) .home-community-description::after {
-    right: -66px;
-    width: 56px;
-    height: 52px;
+    right: calc(-1 * (var(--click-card-w) + var(--click-clear-text)));
   }
   .screen:has(.app-title) .text-link:has(+ .viewer-switch) {
     min-height: 76px;
-    padding-right: 84px;
-  }
-  .screen:has(.app-title) .text-link:has(+ .viewer-switch)::after {
-    width: 72px;
-    height: 64px;
+    padding-right: calc(var(--click-rest-w) + 12px);
   }
   .screen:has(.app-title) .viewer-switch {
-    padding-right: 82px;
-  }
-  .screen:has(.app-title) .viewer-switch::after {
-    width: 68px;
-    height: 74px;
-    background-size: auto 74px;
+    padding-right: calc(var(--click-box-w) + 14px);
   }
 }
