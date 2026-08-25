@@ -1,0 +1,74 @@
+/* New Kit Gaw — Stage 31: topic / statement Click presence.
+   Reading is the main event here. Click appears only at quiet transition points:
+   an empty conversation, or the end of a finished read. */
+
+/* Topic detail is uniquely:
+   back header -> community link -> topic title -> body copy. */
+.screen:has(> .back-header + .plain-link + .screen-title + .body-copy) > .section-title {
+  position: relative;
+}
+
+/* Keep active discussions clean. The section heading gets only a tiny trace cue. */
+.screen:has(> .back-header + .plain-link + .screen-title + .body-copy) > .section-title::after {
+  content: "  ·  🐾";
+  color: rgba(255, 138, 76, .58);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: .08em;
+}
+
+/* No statements yet: click-wait occupies the empty-state breathing room.
+   It is added after the message instead of stealing text width. */
+.screen:has(> .back-header + .plain-link + .screen-title + .body-copy) > .stack > .empty-state::after {
+  content: "";
+  display: block;
+  width: 70px;
+  height: 62px;
+  margin: 8px 2px -4px auto;
+  background: url("assets/click-home.webp") center bottom / contain no-repeat;
+  opacity: .92;
+  pointer-events: none;
+}
+
+/* Statement detail is uniquely:
+   back header -> detail links -> speaker heading -> person mini -> full statement. */
+.screen:has(> .back-header + .detail-links + .subheading) > .statement-full {
+  position: relative;
+}
+
+/* The final navigation block is the reading-end whitespace.
+   click-rest sits after the links, never beside or over the statement itself. */
+.screen:has(> .back-header + .detail-links + .subheading) > .detail-links:last-child::after {
+  content: "";
+  display: block;
+  justify-self: end;
+  width: 78px;
+  height: 66px;
+  margin-top: 4px;
+  background: url("assets/gaw-rest.webp") center bottom / contain no-repeat;
+  opacity: .9;
+  pointer-events: none;
+}
+
+/* A tiny trail marks the end without turning reading into mascot decoration. */
+.screen:has(> .back-header + .detail-links + .subheading) > .detail-links:last-child::before {
+  content: "·  🐾  ·";
+  justify-self: end;
+  margin: 2px 8px -6px 0;
+  color: rgba(255, 138, 76, .5);
+  font-size: 10px;
+  letter-spacing: 1px;
+  pointer-events: none;
+}
+
+@media (max-width: 375px) {
+  .screen:has(> .back-header + .plain-link + .screen-title + .body-copy) > .stack > .empty-state::after {
+    width: 64px;
+    height: 56px;
+  }
+
+  .screen:has(> .back-header + .detail-links + .subheading) > .detail-links:last-child::after {
+    width: 70px;
+    height: 60px;
+  }
+}
