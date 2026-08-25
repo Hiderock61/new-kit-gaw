@@ -1,10 +1,10 @@
-/* New Kit Gaw — Stage 22: Click role placement on HOME.
-   Based on the approved Click character guide. Keep app behavior untouched. */
+/* New Kit Gaw — Stage 23: HOME placement repair.
+   Click lives in the spare space. Information width wins over mascot width. */
 
-/* Header: movement mode. The scooter Click stays as the brand motion cue. */
+/* Header: keep the movement cue, but drop it away from the iPhone status bar. */
 .screen:has(.app-title) .app-title {
   position: relative;
-  min-height: 92px;
+  min-height: 96px;
   margin-bottom: 10px;
   padding: 14px 126px 0 0;
   line-height: 1.05;
@@ -14,7 +14,7 @@
   content: "";
   position: absolute;
   z-index: 1;
-  top: -8px;
+  top: 5px;
   right: -2px;
   width: 118px;
   height: 110px;
@@ -22,21 +22,22 @@
   pointer-events: none;
 }
 
-/* HOME self card: Click is simply waiting there, not performing. */
+/* HOME self card: restore the original readable width.
+   Waiting Click sits below the card edge instead of stealing text space. */
 .screen:has(.app-title) .self-card {
   position: relative;
-  min-height: 98px;
-  padding-right: 92px;
+  min-height: 82px;
+  padding-right: 15px;
   overflow: visible;
 }
 .screen:has(.app-title) .self-card::after {
   content: "";
   position: absolute;
-  z-index: 1;
-  right: 7px;
-  bottom: 3px;
-  width: 82px;
-  height: 86px;
+  z-index: 3;
+  right: 10px;
+  bottom: -53px;
+  width: 66px;
+  height: 62px;
   background: url("assets/click-home.webp") center bottom / contain no-repeat;
   pointer-events: none;
 }
@@ -47,16 +48,18 @@
   z-index: 2;
 }
 .screen:has(.app-title) .self-card .chevron {
-  max-width: 118px;
-  font-size: 14px;
-  line-height: 1.35;
+  max-width: none;
+  font-size: inherit;
+  line-height: inherit;
+  white-space: nowrap;
 }
 
-/* Footprints: exact functional match. Click sniffs the trail. */
+/* Footprints: preserve the successful sniff scene.
+   Only add vertical breathing room for the waiting Click above it. */
 .screen:has(.app-title) .app-title + .self-card + .section-title {
   position: relative;
   min-height: 82px;
-  margin-top: 20px;
+  margin-top: 70px;
   margin-bottom: 0;
   padding-top: 22px;
   padding-right: 98px;
@@ -86,15 +89,16 @@
   pointer-events: none;
 }
 
-/* Community entrance: Click watches rather than explains. */
-.screen:has(.app-title) > h2.section-title:nth-of-type(2) {
+/* Community entrance: target the heading by structure, not nth-of-type.
+   This remains correct even when footprint state changes. */
+.screen:has(.app-title) > h2.section-title:has(+ .stack) {
   position: relative;
   min-height: 76px;
   margin-bottom: 2px;
   padding-top: 22px;
   padding-right: 112px;
 }
-.screen:has(.app-title) > h2.section-title:nth-of-type(2)::after {
+.screen:has(.app-title) > h2.section-title:has(+ .stack)::after {
   content: "";
   position: absolute;
   right: -2px;
@@ -104,25 +108,29 @@
   background: url("assets/click-community.webp") center bottom / contain no-repeat;
   pointer-events: none;
 }
-.screen:has(.app-title) > h2.section-title:nth-of-type(2) + .stack {
+.screen:has(.app-title) > h2.section-title:has(+ .stack) + .stack {
   margin-top: 4px;
 }
 
-/* Validation area: Click drops into the box when the room is just for testing. */
+/* Validation area: crop the source to the box-side character only.
+   This removes the stray white fragment that appeared at the right edge. */
 .screen:has(.app-title) .viewer-switch {
   position: relative;
   min-height: 110px;
-  padding-right: 102px;
+  padding-right: 92px;
   overflow: hidden;
 }
 .screen:has(.app-title) .viewer-switch::after {
   content: "";
   position: absolute;
-  right: 4px;
+  right: 6px;
   bottom: 3px;
-  width: 92px;
+  width: 76px;
   height: 82px;
-  background: url("assets/click-box.webp") center bottom / contain no-repeat;
+  background-image: url("assets/click-box.webp");
+  background-repeat: no-repeat;
+  background-position: left bottom;
+  background-size: auto 82px;
   pointer-events: none;
 }
 
@@ -133,40 +141,52 @@
 
 @media (max-width: 375px) {
   .screen:has(.app-title) .app-title {
-    min-height: 84px;
+    min-height: 90px;
     padding-right: 108px;
     font-size: 25px;
   }
   .screen:has(.app-title) .app-title::before {
+    top: 6px;
     width: 104px;
     height: 98px;
   }
   .screen:has(.app-title) .self-card {
-    min-height: 94px;
-    padding-right: 78px;
+    min-height: 82px;
+    padding-right: 15px;
   }
   .screen:has(.app-title) .self-card::after {
-    width: 70px;
-    height: 76px;
+    right: 8px;
+    bottom: -49px;
+    width: 60px;
+    height: 57px;
   }
   .screen:has(.app-title) .self-card .chevron {
-    max-width: 96px;
+    max-width: none;
     font-size: 13px;
   }
   .screen:has(.app-title) .app-title + .self-card + .section-title {
     min-height: 76px;
+    margin-top: 64px;
     padding-right: 86px;
   }
   .screen:has(.app-title) .app-title + .self-card + .section-title::after {
     width: 82px;
     height: 72px;
   }
-  .screen:has(.app-title) > h2.section-title:nth-of-type(2) {
+  .screen:has(.app-title) > h2.section-title:has(+ .stack) {
     min-height: 68px;
     padding-right: 92px;
   }
-  .screen:has(.app-title) > h2.section-title:nth-of-type(2)::after {
+  .screen:has(.app-title) > h2.section-title:has(+ .stack)::after {
     width: 90px;
     height: 72px;
+  }
+  .screen:has(.app-title) .viewer-switch {
+    padding-right: 82px;
+  }
+  .screen:has(.app-title) .viewer-switch::after {
+    width: 68px;
+    height: 74px;
+    background-size: auto 74px;
   }
 }
