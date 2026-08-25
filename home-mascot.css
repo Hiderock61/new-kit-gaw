@@ -1,5 +1,5 @@
-/* New Kit Gaw — Stage 26: Click component sizing contract.
-   Visual behavior stays the same; mascot dimensions and clear space are now reusable tokens. */
+/* New Kit Gaw — Stage 28: Click component sizing + light profile rollout.
+   Information remains primary; profile gets only two quiet mascot moments. */
 
 :root {
   --click-move-w: 118px;
@@ -12,6 +12,10 @@
   --click-rest-h: 72px;
   --click-box-w: 76px;
   --click-box-h: 82px;
+  --click-wait-w: 60px;
+  --click-wait-h: 56px;
+  --click-peek-w: 56px;
+  --click-peek-h: 52px;
   --click-clear-text: 12px;
 }
 
@@ -123,11 +127,9 @@
   background-repeat: no-repeat;
   pointer-events: none;
 }
-/* Temporary click-work / watch role. */
 .screen:has(.app-title) .home-community-card:nth-child(1) .home-community-description::after {
   background-image: url("assets/click-community.webp");
 }
-/* Temporary discovery role until dedicated click-food exists. */
 .screen:has(.app-title) .home-community-card:nth-child(2) .home-community-description::after {
   background-image: url("assets/gaw-sniff.webp");
 }
@@ -171,6 +173,53 @@
   pointer-events: none;
 }
 
+/* ===== Stage 28: PROFILE =====
+   Person is the subject. Click appears only in spare vertical space and never replaces the avatar. */
+
+/* click-wait: a quiet resident below the profile introduction.
+   It does not reduce the bio width; we create breathing room underneath instead. */
+.screen:has(.profile-head) .profile-head {
+  position: relative;
+  margin-bottom: calc(var(--click-wait-h) - 10px);
+}
+.screen:has(.profile-head) .profile-head::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  right: 4px;
+  bottom: calc(-1 * (var(--click-wait-h) - 4px));
+  width: var(--click-wait-w);
+  height: var(--click-wait-h);
+  background: url("assets/click-home.webp") center bottom / contain no-repeat;
+  opacity: .92;
+  pointer-events: none;
+}
+
+/* click-peek: small observer beside the first community heading only. */
+.screen:has(.profile-head) .profile-head + .section-title {
+  position: relative;
+  min-height: var(--click-peek-h);
+  padding-top: 16px;
+  padding-right: calc(var(--click-peek-w) + 14px);
+}
+.screen:has(.profile-head) .profile-head + .section-title::after {
+  content: "";
+  position: absolute;
+  right: 2px;
+  bottom: -2px;
+  width: var(--click-peek-w);
+  height: var(--click-peek-h);
+  background: url("assets/click-community.webp") center bottom / contain no-repeat;
+  opacity: .86;
+  pointer-events: none;
+}
+
+/* No mascot on topic or statement cards in profile. Text stays the main event. */
+.screen:has(.profile-head) .profile-topic-card::after,
+.screen:has(.profile-head) .profile-statement-card::after {
+  content: none;
+}
+
 @media (max-width: 375px) {
   :root {
     --click-move-w: 104px;
@@ -183,6 +232,10 @@
     --click-rest-h: 64px;
     --click-box-w: 68px;
     --click-box-h: 74px;
+    --click-wait-w: 54px;
+    --click-wait-h: 50px;
+    --click-peek-w: 50px;
+    --click-peek-h: 46px;
     --click-clear-text: 10px;
   }
 
@@ -221,5 +274,13 @@
   }
   .screen:has(.app-title) .viewer-switch {
     padding-right: calc(var(--click-box-w) + 14px);
+  }
+
+  .screen:has(.profile-head) .profile-head {
+    margin-bottom: calc(var(--click-wait-h) - 8px);
+  }
+  .screen:has(.profile-head) .profile-head + .section-title {
+    min-height: var(--click-peek-h);
+    padding-right: calc(var(--click-peek-w) + 12px);
   }
 }
