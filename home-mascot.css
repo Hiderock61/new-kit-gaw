@@ -1,5 +1,5 @@
-/* New Kit Gaw — Stage 24: HOME Click density tuning.
-   Keep three visible mascot beats across HOME: move, sniff, rest. */
+/* New Kit Gaw — Stage 25: HOME community-card mascot pilot.
+   Keep the information icon, then add Click only to the first two cards. */
 
 /* 1) Header: movement cue. */
 .screen:has(.app-title) .app-title {
@@ -22,7 +22,7 @@
   pointer-events: none;
 }
 
-/* Profile card stays information-first. No mascot steals its text width. */
+/* Profile card stays information-first. */
 .screen:has(.app-title) .self-card {
   position: relative;
   min-height: 82px;
@@ -45,7 +45,7 @@
   white-space: nowrap;
 }
 
-/* 2) Footprints: the strongest functional match, so preserve it. */
+/* 2) Footprints: keep the strongest functional match. */
 .screen:has(.app-title) .app-title + .self-card + .section-title {
   position: relative;
   min-height: 82px;
@@ -79,13 +79,46 @@
   pointer-events: none;
 }
 
-/* Community list itself stays clean in this stage. */
+/* 3) Community-card pilot.
+   The left pictogram remains the fast category cue.
+   Click uses spare space on the right and never becomes the tap target. */
 .screen:has(.app-title) .home-community-card {
   isolation: isolate;
 }
+.screen:has(.app-title) .home-community-card:nth-child(1),
+.screen:has(.app-title) .home-community-card:nth-child(2) {
+  min-height: 76px;
+  padding-right: 94px;
+}
+.screen:has(.app-title) .home-community-card:nth-child(1) .home-community-description,
+.screen:has(.app-title) .home-community-card:nth-child(2) .home-community-description {
+  position: relative;
+  z-index: 2;
+}
+.screen:has(.app-title) .home-community-card:nth-child(1) .home-community-description::after,
+.screen:has(.app-title) .home-community-card:nth-child(2) .home-community-description::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  right: -74px;
+  bottom: -7px;
+  width: 62px;
+  height: 58px;
+  background-position: center bottom;
+  background-size: contain;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+/* Movie pilot: laptop pose reads as "watching / browsing" until a popcorn pose arrives. */
+.screen:has(.app-title) .home-community-card:nth-child(1) .home-community-description::after {
+  background-image: url("assets/click-community.webp");
+}
+/* Town-Chinese pilot: sniffing pose reads as "finding a place / following a scent". */
+.screen:has(.app-title) .home-community-card:nth-child(2) .home-community-description::after {
+  background-image: url("assets/gaw-sniff.webp");
+}
 
-/* 3) Lower HOME: rest mode appears beside the Explore entry.
-   This creates the "scroll and find Click again" rhythm without filling every section. */
+/* 4) Lower HOME: rest mode beside Explore. */
 .screen:has(.app-title) .text-link:has(+ .viewer-switch) {
   position: relative;
   min-height: 82px;
@@ -102,7 +135,7 @@
   pointer-events: none;
 }
 
-/* Validation remains a test-only area. Keep it visually secondary. */
+/* Validation remains test-only and visually secondary. */
 .screen:has(.app-title) .viewer-switch {
   position: relative;
   min-height: 100px;
@@ -151,6 +184,17 @@
   .screen:has(.app-title) .app-title + .self-card + .section-title::after {
     width: 82px;
     height: 72px;
+  }
+  .screen:has(.app-title) .home-community-card:nth-child(1),
+  .screen:has(.app-title) .home-community-card:nth-child(2) {
+    min-height: 72px;
+    padding-right: 84px;
+  }
+  .screen:has(.app-title) .home-community-card:nth-child(1) .home-community-description::after,
+  .screen:has(.app-title) .home-community-card:nth-child(2) .home-community-description::after {
+    right: -66px;
+    width: 56px;
+    height: 52px;
   }
   .screen:has(.app-title) .text-link:has(+ .viewer-switch) {
     min-height: 76px;
