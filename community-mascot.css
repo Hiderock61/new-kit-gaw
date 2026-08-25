@@ -1,0 +1,49 @@
+/* New Kit Gaw — Stage 30: community detail Click presence.
+   Community pages belong to the people and topics. Click stays nearby like another resident,
+   using vertical whitespace instead of taking text width. */
+
+/* Community detail has the unique structure:
+   back header -> screen title -> body copy.
+   This avoids changing profile/topic/statement screens. */
+.screen:has(> .back-header + .screen-title + .body-copy) > .screen-title {
+  position: relative;
+  margin-bottom: 2px;
+}
+
+/* click-peek / community resident.
+   It gets its own small row after the title, so long community names keep the full width. */
+.screen:has(> .back-header + .screen-title + .body-copy) > .screen-title::after {
+  content: "";
+  display: block;
+  width: 78px;
+  height: 66px;
+  margin: 2px 2px -8px auto;
+  background: url("assets/click-community.webp") center bottom / contain no-repeat;
+  pointer-events: none;
+}
+
+/* The community description remains full-width and information-first. */
+.screen:has(> .back-header + .screen-title + .body-copy) > .body-copy {
+  width: 100%;
+  margin-top: 4px;
+}
+
+/* The membership label reads like a small resident badge without becoming mascot-heavy. */
+.screen:has(> .back-header + .screen-title + .body-copy) > .status-label::before {
+  content: "🐾 ";
+  font-size: .9em;
+}
+
+/* Topic-area headings get only a tiny trace cue. No extra Click inside topic cards. */
+.screen:has(> .back-header + .screen-title + .body-copy) > .section-title::before {
+  content: "· ";
+  color: rgba(255, 138, 76, .7);
+}
+
+@media (max-width: 375px) {
+  .screen:has(> .back-header + .screen-title + .body-copy) > .screen-title::after {
+    width: 70px;
+    height: 60px;
+    margin-top: 0;
+  }
+}
