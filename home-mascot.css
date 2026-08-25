@@ -1,7 +1,7 @@
-/* New Kit Gaw — Stage 23: HOME placement repair.
-   Click lives in the spare space. Information width wins over mascot width. */
+/* New Kit Gaw — Stage 24: HOME Click density tuning.
+   Keep three visible mascot beats across HOME: move, sniff, rest. */
 
-/* Header: keep the movement cue, but drop it away from the iPhone status bar. */
+/* 1) Header: movement cue. */
 .screen:has(.app-title) .app-title {
   position: relative;
   min-height: 96px;
@@ -22,8 +22,7 @@
   pointer-events: none;
 }
 
-/* HOME self card: restore the original readable width.
-   Waiting Click sits below the card edge instead of stealing text space. */
+/* Profile card stays information-first. No mascot steals its text width. */
 .screen:has(.app-title) .self-card {
   position: relative;
   min-height: 82px;
@@ -31,15 +30,7 @@
   overflow: visible;
 }
 .screen:has(.app-title) .self-card::after {
-  content: "";
-  position: absolute;
-  z-index: 3;
-  right: 10px;
-  bottom: -53px;
-  width: 66px;
-  height: 62px;
-  background: url("assets/click-home.webp") center bottom / contain no-repeat;
-  pointer-events: none;
+  content: none;
 }
 .screen:has(.app-title) .self-card .avatar,
 .screen:has(.app-title) .self-card .self-card__body,
@@ -54,12 +45,11 @@
   white-space: nowrap;
 }
 
-/* Footprints: preserve the successful sniff scene.
-   Only add vertical breathing room for the waiting Click above it. */
+/* 2) Footprints: the strongest functional match, so preserve it. */
 .screen:has(.app-title) .app-title + .self-card + .section-title {
   position: relative;
   min-height: 82px;
-  margin-top: 70px;
+  margin-top: 30px;
   margin-bottom: 0;
   padding-top: 22px;
   padding-right: 98px;
@@ -89,34 +79,33 @@
   pointer-events: none;
 }
 
-/* Community entrance: target the heading by structure, not nth-of-type.
-   This remains correct even when footprint state changes. */
-.screen:has(.app-title) > h2.section-title:has(+ .stack) {
-  position: relative;
-  min-height: 76px;
-  margin-bottom: 2px;
-  padding-top: 22px;
-  padding-right: 112px;
-}
-.screen:has(.app-title) > h2.section-title:has(+ .stack)::after {
-  content: "";
-  position: absolute;
-  right: -2px;
-  bottom: -8px;
-  width: 108px;
-  height: 86px;
-  background: url("assets/click-community.webp") center bottom / contain no-repeat;
-  pointer-events: none;
-}
-.screen:has(.app-title) > h2.section-title:has(+ .stack) + .stack {
-  margin-top: 4px;
+/* Community list itself stays clean in this stage. */
+.screen:has(.app-title) .home-community-card {
+  isolation: isolate;
 }
 
-/* Validation area: crop the source to the box-side character only.
-   This removes the stray white fragment that appeared at the right edge. */
+/* 3) Lower HOME: rest mode appears beside the Explore entry.
+   This creates the "scroll and find Click again" rhythm without filling every section. */
+.screen:has(.app-title) .text-link:has(+ .viewer-switch) {
+  position: relative;
+  min-height: 82px;
+  padding-right: 96px;
+}
+.screen:has(.app-title) .text-link:has(+ .viewer-switch)::after {
+  content: "";
+  position: absolute;
+  right: 6px;
+  bottom: 3px;
+  width: 82px;
+  height: 72px;
+  background: url("assets/gaw-rest.webp") center bottom / contain no-repeat;
+  pointer-events: none;
+}
+
+/* Validation remains a test-only area. Keep it visually secondary. */
 .screen:has(.app-title) .viewer-switch {
   position: relative;
-  min-height: 110px;
+  min-height: 100px;
   padding-right: 92px;
   overflow: hidden;
 }
@@ -131,12 +120,8 @@
   background-repeat: no-repeat;
   background-position: left bottom;
   background-size: auto 82px;
+  opacity: .72;
   pointer-events: none;
-}
-
-/* Click is atmosphere, never the tap target. */
-.screen:has(.app-title) .home-community-card {
-  isolation: isolate;
 }
 
 @media (max-width: 375px) {
@@ -154,32 +139,26 @@
     min-height: 82px;
     padding-right: 15px;
   }
-  .screen:has(.app-title) .self-card::after {
-    right: 8px;
-    bottom: -49px;
-    width: 60px;
-    height: 57px;
-  }
   .screen:has(.app-title) .self-card .chevron {
     max-width: none;
     font-size: 13px;
   }
   .screen:has(.app-title) .app-title + .self-card + .section-title {
     min-height: 76px;
-    margin-top: 64px;
+    margin-top: 26px;
     padding-right: 86px;
   }
   .screen:has(.app-title) .app-title + .self-card + .section-title::after {
     width: 82px;
     height: 72px;
   }
-  .screen:has(.app-title) > h2.section-title:has(+ .stack) {
-    min-height: 68px;
-    padding-right: 92px;
+  .screen:has(.app-title) .text-link:has(+ .viewer-switch) {
+    min-height: 76px;
+    padding-right: 84px;
   }
-  .screen:has(.app-title) > h2.section-title:has(+ .stack)::after {
-    width: 90px;
-    height: 72px;
+  .screen:has(.app-title) .text-link:has(+ .viewer-switch)::after {
+    width: 72px;
+    height: 64px;
   }
   .screen:has(.app-title) .viewer-switch {
     padding-right: 82px;
