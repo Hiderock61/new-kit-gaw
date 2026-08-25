@@ -1,7 +1,7 @@
-/* New Kit Gaw — Stage 21: independent mascot placement on HOME only.
-   The app structure and interactions stay untouched. */
+/* New Kit Gaw — Stage 22: Click role placement on HOME.
+   Based on the approved Click character guide. Keep app behavior untouched. */
 
-/* Header mascot: independent transparent art, never a rectangular crop. */
+/* Header: movement mode. The scooter Click stays as the brand motion cue. */
 .screen:has(.app-title) .app-title {
   position: relative;
   min-height: 92px;
@@ -21,27 +21,23 @@
   background: url("assets/gaw-skate.webp") center / contain no-repeat;
   pointer-events: none;
 }
-.screen:has(.app-title) .app-title::after {
-  position: relative;
-  z-index: 2;
-}
 
-/* The current-user card gets the resting Gaw without replacing any controls. */
+/* HOME self card: Click is simply waiting there, not performing. */
 .screen:has(.app-title) .self-card {
   position: relative;
-  min-height: 96px;
-  padding-right: 86px;
+  min-height: 98px;
+  padding-right: 92px;
   overflow: visible;
 }
 .screen:has(.app-title) .self-card::after {
   content: "";
   position: absolute;
   z-index: 1;
-  right: 5px;
-  bottom: -3px;
+  right: 7px;
+  bottom: 3px;
   width: 82px;
-  height: 72px;
-  background: url("assets/gaw-rest.webp") center bottom / contain no-repeat;
+  height: 86px;
+  background: url("assets/click-home.webp") center bottom / contain no-repeat;
   pointer-events: none;
 }
 .screen:has(.app-title) .self-card .avatar,
@@ -56,7 +52,7 @@
   line-height: 1.35;
 }
 
-/* Footprints become a small scene: the non-sunglasses Gaw is actually sniffing. */
+/* Footprints: exact functional match. Click sniffs the trail. */
 .screen:has(.app-title) .app-title + .self-card + .section-title {
   position: relative;
   min-height: 82px;
@@ -76,12 +72,8 @@
   pointer-events: none;
 }
 .screen:has(.app-title) .app-title + .self-card + .section-title + .text-link {
-  margin-top: -10px;
-}
-
-/* A restrained paw trail connects the footprint scene to the town below. */
-.screen:has(.app-title) .app-title + .self-card + .section-title + .text-link {
   position: relative;
+  margin-top: -10px;
 }
 .screen:has(.app-title) .app-title + .self-card + .section-title + .text-link::after {
   content: "·  🐾  ·  🐾";
@@ -94,7 +86,47 @@
   pointer-events: none;
 }
 
-/* Keep the community cards as the content, not as a mascot gallery. */
+/* Community entrance: Click watches rather than explains. */
+.screen:has(.app-title) > h2.section-title:nth-of-type(2) {
+  position: relative;
+  min-height: 76px;
+  margin-bottom: 2px;
+  padding-top: 22px;
+  padding-right: 112px;
+}
+.screen:has(.app-title) > h2.section-title:nth-of-type(2)::after {
+  content: "";
+  position: absolute;
+  right: -2px;
+  bottom: -8px;
+  width: 108px;
+  height: 86px;
+  background: url("assets/click-community.webp") center bottom / contain no-repeat;
+  pointer-events: none;
+}
+.screen:has(.app-title) > h2.section-title:nth-of-type(2) + .stack {
+  margin-top: 4px;
+}
+
+/* Validation area: Click drops into the box when the room is just for testing. */
+.screen:has(.app-title) .viewer-switch {
+  position: relative;
+  min-height: 110px;
+  padding-right: 102px;
+  overflow: hidden;
+}
+.screen:has(.app-title) .viewer-switch::after {
+  content: "";
+  position: absolute;
+  right: 4px;
+  bottom: 3px;
+  width: 92px;
+  height: 82px;
+  background: url("assets/click-box.webp") center bottom / contain no-repeat;
+  pointer-events: none;
+}
+
+/* Click is atmosphere, never the tap target. */
 .screen:has(.app-title) .home-community-card {
   isolation: isolate;
 }
@@ -110,12 +142,12 @@
     height: 98px;
   }
   .screen:has(.app-title) .self-card {
-    min-height: 92px;
-    padding-right: 74px;
+    min-height: 94px;
+    padding-right: 78px;
   }
   .screen:has(.app-title) .self-card::after {
     width: 70px;
-    height: 64px;
+    height: 76px;
   }
   .screen:has(.app-title) .self-card .chevron {
     max-width: 96px;
@@ -129,12 +161,12 @@
     width: 82px;
     height: 72px;
   }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .screen:has(.app-title) .app-title::before,
-  .screen:has(.app-title) .self-card::after,
-  .screen:has(.app-title) .app-title + .self-card + .section-title::after {
-    animation: none;
+  .screen:has(.app-title) > h2.section-title:nth-of-type(2) {
+    min-height: 68px;
+    padding-right: 92px;
+  }
+  .screen:has(.app-title) > h2.section-title:nth-of-type(2)::after {
+    width: 90px;
+    height: 72px;
   }
 }
