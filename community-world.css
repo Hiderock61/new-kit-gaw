@@ -1,0 +1,109 @@
+/* New Kit Gaw — Stage 32: community-specific atmosphere.
+   Goal: make communities feel like places in one town, without turning every card into a mascot panel. */
+
+/* Category accents are information, not decoration. */
+[data-community-category="文化"] { --community-accent: #f3b39a; --community-soft: #fff0e9; }
+[data-community-category="スポーツ"] { --community-accent: #9ed7bc; --community-soft: #eefaf4; }
+[data-community-category="地域"] { --community-accent: #c9b7e8; --community-soft: #f7f2ff; }
+[data-community-category="食"] { --community-accent: #f2c66f; --community-soft: #fff8df; }
+[data-community-category="仕事"] { --community-accent: #9fc8ee; --community-soft: #eef7ff; }
+[data-community-category="生活"] { --community-accent: #d8b99c; --community-soft: #faf2ea; }
+[data-community-category="ゲーム"] { --community-accent: #aeb7ef; --community-soft: #f1f3ff; }
+[data-community-category="旅行"] { --community-accent: #9fd9d3; --community-soft: #eefaf9; }
+
+/* Community rows get a tiny street-sign rail. The original content width stays intact. */
+.list-item[data-community-category] {
+  box-shadow: inset 3px 0 0 var(--community-accent, #eadfce), var(--shadow-soft);
+}
+.list-item[data-community-category]:active {
+  background: var(--community-soft, #fff8ef);
+}
+
+/* HOME already has strong category pictograms. Add only a faint category rail. */
+.home-community-card[data-community-category] {
+  box-shadow: inset 3px 0 0 var(--community-accent, #eadfce), var(--shadow-soft);
+}
+
+/* Community detail becomes a tiny "address" in the Kit Gaw town. */
+.community-world {
+  position: relative;
+  isolation: isolate;
+}
+.community-world::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 56px;
+  right: -8px;
+  width: 86px;
+  height: 86px;
+  border-top: 1px solid color-mix(in srgb, var(--community-accent, #d7b992) 34%, transparent);
+  border-right: 1px solid color-mix(in srgb, var(--community-accent, #d7b992) 34%, transparent);
+  border-radius: 0 18px 0 0;
+  opacity: .55;
+  pointer-events: none;
+}
+
+.community-world > .screen-title::before {
+  content: var(--community-sign, "COMMUNITY");
+  display: block;
+  width: fit-content;
+  margin-bottom: 7px;
+  padding: 3px 8px 2px;
+  border: 1px solid color-mix(in srgb, var(--community-accent, #d7b992) 75%, #ffffff);
+  border-radius: 4px;
+  background: var(--community-soft, #fff8ef);
+  color: #715f54;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .12em;
+  line-height: 1.35;
+}
+
+/* Representative places get their own sign language. */
+.community-world[data-community-id="movie"] { --community-sign: "FILM"; }
+.community-world[data-community-id="chinese"] { --community-sign: "NOODLES"; }
+.community-world[data-community-id="morningRun"] { --community-sign: "RUN"; }
+.community-world[data-community-id="remoteWork"] { --community-sign: "DESK"; }
+.community-world[data-community-id="liveHouse"] { --community-sign: "LIVE"; }
+.community-world[data-community-id="koenji"] { --community-sign: "KOENJI"; }
+.community-world[data-community-id="reading"] { --community-sign: "BOOKS"; }
+.community-world[data-community-id="cafe"] { --community-sign: "CAFE"; }
+.community-world[data-community-id="photo"] { --community-sign: "PHOTO"; }
+.community-world[data-community-id="sento"] { --community-sign: "SENTO"; }
+.community-world[data-community-id="bike"] { --community-sign: "RIDE"; }
+.community-world[data-community-id="garden"] { --community-sign: "GARDEN"; }
+
+/* Fallback signs for communities without a dedicated word yet. */
+.community-world[data-community-category="文化"] { --community-sign: "CULTURE"; }
+.community-world[data-community-category="スポーツ"] { --community-sign: "SPORT"; }
+.community-world[data-community-category="地域"] { --community-sign: "LOCAL"; }
+.community-world[data-community-category="食"] { --community-sign: "FOOD"; }
+.community-world[data-community-category="仕事"] { --community-sign: "WORK"; }
+.community-world[data-community-category="生活"] { --community-sign: "LIFE"; }
+.community-world[data-community-category="ゲーム"] { --community-sign: "GAME"; }
+.community-world[data-community-category="旅行"] { --community-sign: "TRIP"; }
+
+/* Re-apply named signs after category fallback rules. */
+.community-world[data-community-id="movie"] { --community-sign: "FILM"; }
+.community-world[data-community-id="chinese"] { --community-sign: "NOODLES"; }
+.community-world[data-community-id="morningRun"] { --community-sign: "RUN"; }
+.community-world[data-community-id="remoteWork"] { --community-sign: "DESK"; }
+.community-world[data-community-id="liveHouse"] { --community-sign: "LIVE"; }
+.community-world[data-community-id="koenji"] { --community-sign: "KOENJI"; }
+.community-world[data-community-id="reading"] { --community-sign: "BOOKS"; }
+.community-world[data-community-id="cafe"] { --community-sign: "CAFE"; }
+.community-world[data-community-id="photo"] { --community-sign: "PHOTO"; }
+.community-world[data-community-id="sento"] { --community-sign: "SENTO"; }
+.community-world[data-community-id="bike"] { --community-sign: "RIDE"; }
+.community-world[data-community-id="garden"] { --community-sign: "GARDEN"; }
+
+@media (max-width: 375px) {
+  .community-world::after {
+    width: 72px;
+    height: 72px;
+  }
+  .community-world > .screen-title::before {
+    font-size: 9px;
+  }
+}
