@@ -1,0 +1,142 @@
+/* New Kit Gaw — Stage 40: real-device surface palette pass.
+   Gemini + Copilot review converged on the same diagnosis:
+   warm direction is right, but the current cream-on-cream stack lacks luminance separation.
+   This layer creates an explicit ground -> page -> card hierarchy and gives major section entrances
+   a blue structural cue instead of another warm band. Presentation only; no navigation changes. */
+
+:root {
+  --gaw-ground: #f4f1eb;
+  --gaw-page: #fffefc;
+  --gaw-section: #f7f5f2;
+  --gaw-card: #ffffff;
+  --gaw-line: #e5e2dd;
+  --gaw-blue-soft: #eaf3ff;
+
+  --color-bg: var(--gaw-ground);
+  --color-surface: var(--gaw-card);
+  --color-surface-soft: var(--gaw-section);
+  --color-border: var(--gaw-line);
+  --color-border-strong: #d7d1c8;
+  --shadow-soft: 0 1px 5px rgba(48, 37, 31, .045);
+}
+
+/* Layer 1: the town ground. */
+html,
+body {
+  background: var(--gaw-ground);
+}
+
+/* Layer 2: the magazine/page surface.
+   A narrow ground edge remains visible even on iPhone so the page no longer feels like one beige sheet. */
+.app-shell {
+  width: min(calc(100% - 12px), 430px);
+  min-height: calc(100dvh - 12px);
+  margin: 6px auto;
+  background: var(--gaw-page);
+  border: 1px solid rgba(229, 226, 221, .95);
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(48, 37, 31, .035);
+}
+
+/* Layer 3: information cards. White becomes a deliberate information island. */
+.card,
+.self-card,
+.list-item,
+.topic-card,
+.statement-card,
+.profile-topic-card,
+.home-community-card,
+.detail-link,
+.footprint-item {
+  border-color: var(--gaw-line);
+  background: var(--gaw-card);
+  box-shadow: 0 1px 5px rgba(48, 37, 31, .04);
+}
+
+/* Secondary paper surfaces are slightly darker than the main page, not yellower. */
+.person-mini,
+.profile-statement-card,
+.context-banner,
+.empty-state,
+.search-field,
+.viewer-select {
+  border-color: var(--gaw-line);
+  background: var(--gaw-section);
+}
+
+/* Keep warm color for trace/temperature. Do not use it to define every structural band. */
+.status-label {
+  border-color: #e4cf9e;
+  background: #fff3cf;
+}
+
+/* Strong section entrance for community topics.
+   Blue = structure / route, matching the product's navigation grammar. */
+.community-world > .section-title {
+  margin-top: 28px;
+  margin-bottom: 13px;
+  padding: 10px 13px 10px;
+  border-left: 5px solid var(--gaw-blue, #2f6db2);
+  border-radius: 8px;
+  background: var(--gaw-blue-soft);
+  color: var(--gaw-ink, #30251f);
+  box-shadow: inset 0 0 0 1px rgba(47, 109, 178, .08);
+}
+
+.community-world > .section-title::before {
+  content: "TOPICS";
+  display: block;
+  margin-bottom: 1px;
+  color: var(--gaw-blue, #2f6db2);
+  font-size: 9px;
+  font-weight: 850;
+  line-height: 1.2;
+  letter-spacing: .15em;
+}
+
+/* Profile's first major section uses the same grammar so biography and community list cannot blend together. */
+.screen:has(.profile-head) > .profile-head + .section-title {
+  border-left-color: var(--gaw-blue, #2f6db2);
+  background: var(--gaw-blue-soft);
+  box-shadow: inset 0 0 0 1px rgba(47, 109, 178, .08);
+}
+
+.screen:has(.profile-head) > .profile-head + .section-title::before {
+  content: "COMMUNITIES";
+  display: block;
+  margin-bottom: 1px;
+  color: var(--gaw-blue, #2f6db2);
+  font-size: 9px;
+  font-weight: 850;
+  line-height: 1.2;
+  letter-spacing: .13em;
+}
+
+/* Keep topic/person cards crisp against the near-white page. */
+.topic-card,
+.statement-card,
+.profile-topic-card,
+.list-item,
+.footprint-item {
+  border-color: #e3dfd9;
+}
+
+/* The older yellow-tinted page gradients are intentionally neutralized here. */
+.app-shell,
+.screen {
+  background-color: var(--gaw-page);
+}
+
+@media (max-width: 375px) {
+  .app-shell {
+    width: calc(100% - 10px);
+    margin: 5px auto;
+    min-height: calc(100dvh - 10px);
+    border-radius: 8px;
+  }
+
+  .community-world > .section-title {
+    padding-top: 9px;
+    padding-bottom: 9px;
+  }
+}
