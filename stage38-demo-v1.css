@@ -1,0 +1,41 @@
+/* New Kit Gaw — Stage 38: Demo v1 production presentation.
+   Keep the demo clean by default while preserving backstage controls behind ?debug=1. */
+
+/* The viewer switch remains in the DOM for testing, but is not part of the public Demo v1 surface. */
+.viewer-switch {
+  display: none;
+}
+
+html[data-demo-debug="true"] .viewer-switch {
+  display: block;
+}
+
+/* Final guardrails for the public demo surface. */
+.app-shell,
+.screen {
+  max-width: 100%;
+}
+
+img,
+svg,
+canvas {
+  max-width: 100%;
+}
+
+/* Decorative Click layers must never become accidental interaction targets. */
+.app-title::before,
+.app-title::after,
+.screen-title::after,
+.section-title::after,
+.empty-state::after,
+.detail-links::before,
+.detail-links::after {
+  pointer-events: none;
+}
+
+/* Demo v1 is intentionally a calm reading/discovery interface. */
+@media (max-width: 375px) {
+  .app-shell {
+    width: 100%;
+  }
+}
