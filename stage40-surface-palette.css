@@ -70,6 +70,25 @@ body {
   background: #fff3cf;
 }
 
+/* Community hero: remove the empty beige parking lot seen in the iPhone review.
+   Use a known-visible sniff pose and a smaller vertical reserve. */
+.community-world > .screen-title {
+  min-height: 92px;
+  padding-bottom: 48px;
+}
+
+.community-world > .screen-title::after {
+  right: 4px;
+  bottom: -1px;
+  width: 76px;
+  height: 64px;
+  background-image: url("assets/gaw-sniff.webp");
+  background-position: center bottom;
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: .94;
+}
+
 /* Strong section entrance for community topics.
    Blue = structure / route, matching the product's navigation grammar. */
 .community-world > .section-title {
@@ -133,6 +152,16 @@ body {
     margin: 5px auto;
     min-height: calc(100dvh - 10px);
     border-radius: 8px;
+  }
+
+  .community-world > .screen-title {
+    min-height: 86px;
+    padding-bottom: 44px;
+  }
+
+  .community-world > .screen-title::after {
+    width: 70px;
+    height: 58px;
   }
 
   .community-world > .section-title {
