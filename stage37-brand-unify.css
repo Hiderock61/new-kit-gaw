@@ -1,0 +1,344 @@
+/* New Kit Gaw Stage 37: brand unification.
+   One visual grammar across HOME, profiles, communities, topics, statements and footprints.
+   This layer changes presentation only. Navigation, tap targets and Click placement remain intact. */
+
+:root {
+  --gaw-cream: #fff6ec;
+  --gaw-paper: #ffffff;
+  --gaw-paper-warm: #fffaf4;
+  --gaw-ink: #30251f;
+  --gaw-muted: #7f6d62;
+  --gaw-blue: #2f6db2;
+  --gaw-blue-soft: #eaf3ff;
+  --gaw-orange: #ff8a4c;
+  --gaw-yellow: #ffd272;
+  --gaw-mint: #bfead6;
+  --gaw-peach: #ffd9c7;
+  --gaw-sky: #d7e8ff;
+  --gaw-line: #eadfce;
+  --gaw-line-strong: #d7b992;
+  --gaw-radius-card: 12px;
+  --gaw-radius-control: 9px;
+  --gaw-shadow: 0 4px 14px rgba(83, 61, 44, .075);
+  --gaw-shadow-light: 0 2px 8px rgba(83, 61, 44, .055);
+
+  --color-bg: var(--gaw-cream);
+  --color-surface: var(--gaw-paper);
+  --color-surface-soft: #fff4e5;
+  --color-primary: var(--gaw-orange);
+  --color-primary-dark: #5a3828;
+  --color-text: var(--gaw-ink);
+  --color-text-soft: var(--gaw-muted);
+  --color-border: var(--gaw-line);
+  --color-border-strong: var(--gaw-line-strong);
+  --radius: var(--gaw-radius-card);
+  --shadow-soft: var(--gaw-shadow);
+}
+
+html,
+body {
+  background: var(--gaw-cream);
+  color: var(--gaw-ink);
+}
+
+body {
+  letter-spacing: .005em;
+}
+
+.app-shell {
+  background: var(--gaw-paper-warm);
+  border-left: 1px solid rgba(215, 185, 146, .22);
+  border-right: 1px solid rgba(215, 185, 146, .22);
+}
+
+/* Typography: editorial, compact and consistent. */
+.app-title {
+  color: var(--gaw-ink);
+  font-size: 27px;
+  font-weight: 820;
+  letter-spacing: -.025em;
+}
+
+.screen-title {
+  color: var(--gaw-ink);
+  font-size: 24px;
+  font-weight: 780;
+  letter-spacing: -.018em;
+}
+
+.section-title {
+  color: var(--gaw-ink);
+  font-size: 17px;
+  font-weight: 760;
+  letter-spacing: .005em;
+}
+
+.subheading {
+  color: #5f4c42;
+  font-size: 14px;
+  font-weight: 760;
+  letter-spacing: .02em;
+}
+
+.body-copy,
+.statement-full {
+  color: #44362f;
+}
+
+.meta,
+.count,
+.item-description,
+.excerpt,
+.profile-topic-excerpt {
+  color: var(--gaw-muted);
+}
+
+/* Blue always means navigation or action. */
+.back-button,
+.text-link,
+.plain-link,
+.detail-link,
+.self-card .chevron,
+.footprint-item .chevron,
+.person-mini__hint,
+.read-hint {
+  color: var(--gaw-blue);
+}
+
+.back-header {
+  border-bottom-color: var(--gaw-line);
+}
+
+.back-button,
+.text-link,
+.plain-link,
+.detail-link {
+  text-underline-offset: 3px;
+}
+
+/* Shared paper-card language. */
+.card,
+.list-item,
+.topic-card,
+.statement-card,
+.profile-topic-card,
+.profile-statement-card,
+.home-community-card,
+.detail-link,
+.context-banner,
+.empty-state {
+  border-color: var(--gaw-line);
+  border-radius: var(--gaw-radius-card);
+}
+
+.card,
+.list-item,
+.topic-card,
+.statement-card,
+.profile-topic-card,
+.home-community-card,
+.detail-link {
+  background: var(--gaw-paper);
+  box-shadow: var(--gaw-shadow-light);
+}
+
+.self-card {
+  border-left: 4px solid var(--gaw-blue);
+  box-shadow: var(--gaw-shadow);
+}
+
+/* Person identity stays distinct from Click and from community signs. */
+.avatar {
+  border-color: #e7c6a7;
+  background: #fff0dc;
+  color: #7d4427;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .6);
+}
+
+.person-mini {
+  border-top-color: var(--gaw-line);
+  background: #fff8ef;
+}
+
+/* Community cards keep category pictograms and one common street-sign shape. */
+.home-community-list {
+  gap: 8px;
+}
+
+.home-community-card {
+  min-height: 64px;
+  border-radius: var(--gaw-radius-card);
+  box-shadow: var(--gaw-shadow-light);
+}
+
+.home-community-card::before {
+  box-shadow: inset 0 0 0 1px rgba(90, 56, 40, .035);
+}
+
+.home-community-card::after {
+  color: #90705b;
+}
+
+.home-community-name,
+.item-title,
+.profile-topic-title {
+  color: var(--gaw-ink);
+}
+
+/* Profile activity uses the brand pair consistently. */
+.profile-topic-card {
+  border-left: 3px solid var(--gaw-blue);
+}
+
+.profile-statement-card {
+  border-left: 3px solid var(--gaw-orange);
+  background: #fff9f2;
+  box-shadow: none;
+}
+
+.profile-statement-topic {
+  color: #a95b33;
+}
+
+/* Tags and search controls share the same small-control geometry. */
+.search-field,
+.viewer-select,
+.category-button,
+.status-label {
+  border-color: var(--gaw-line);
+  border-radius: var(--gaw-radius-control);
+}
+
+.search-field,
+.viewer-select {
+  background: #fffdf9;
+}
+
+.search-field:focus,
+.viewer-select:focus {
+  border-color: var(--gaw-blue);
+  outline: 2px solid rgba(47, 109, 178, .14);
+  outline-offset: 1px;
+}
+
+.category-button {
+  border-radius: 999px;
+  background: #fff8ef;
+  color: #654d40;
+}
+
+.category-button.is-active {
+  border-color: var(--gaw-blue);
+  background: var(--gaw-blue);
+  color: #fff;
+}
+
+.status-label {
+  border-radius: 999px;
+  border-color: #e5c47e;
+  background: #fff1c6;
+  color: #75531f;
+}
+
+.context-banner {
+  border-color: #edd4b4;
+  background: #fff4df;
+  box-shadow: none;
+}
+
+.empty-state {
+  border-style: dashed;
+  border-color: #dfc7aa;
+  background: rgba(255, 255, 255, .58);
+}
+
+/* Reading screens stay calmer than discovery screens. */
+.topic-card,
+.statement-card {
+  overflow: hidden;
+}
+
+.statement-full {
+  border-color: var(--gaw-line);
+  font-size: 17px;
+  line-height: 1.82;
+}
+
+.detail-links {
+  border-top-color: var(--gaw-line);
+}
+
+/* Footprints retain orange as trace language, but actions stay blue. */
+.footprint-item {
+  border-radius: var(--gaw-radius-card);
+}
+
+/* Testing UI is intentionally backstage. */
+.viewer-switch {
+  border-color: #e9c88e;
+  background: rgba(255, 247, 228, .74);
+  color: var(--gaw-muted);
+}
+
+/* Focus visibility for keyboard and external-keyboard use on iPhone/iPad. */
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--gaw-blue);
+  outline-offset: 2px;
+}
+
+/* Touch feedback uses warmth, not a new color system. */
+.home-community-card:active,
+.list-item:active,
+.topic-main:active,
+.statement-main:active,
+.profile-topic-card:active,
+.profile-statement-card:active,
+.detail-link:active,
+.person-mini:active {
+  background: #fff5e8;
+}
+
+@media (hover: hover) {
+  .home-community-card:hover,
+  .list-item:hover,
+  .profile-topic-card:hover,
+  .detail-link:hover {
+    background: #fffdf9;
+    box-shadow: var(--gaw-shadow);
+  }
+
+  .text-link:hover,
+  .plain-link:hover,
+  .detail-link:hover,
+  .back-button:hover {
+    color: #1f5d9f;
+  }
+}
+
+@media (max-width: 375px) {
+  .app-shell {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .app-title {
+    font-size: 25px;
+  }
+
+  .screen-title {
+    font-size: 22px;
+  }
+
+  .section-title {
+    font-size: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-community-card,
+  .toast {
+    transition: none;
+  }
+}
