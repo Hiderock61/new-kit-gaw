@@ -1,0 +1,59 @@
+/* New Kit Gaw — Stage 36: Click excess audit.
+   The mascot remains a resident, not wallpaper. This layer prunes placements that became too dense
+   after the pilot stages while preserving all navigation and test functionality. */
+
+/* HOME returns to the Stage 27 baseline of three main encounters:
+   move -> sniff -> rest.
+   The two community-card pilot mascots are disabled until dedicated movie/food assets exist. */
+.screen:has(.app-title) .home-community-card:nth-child(1),
+.screen:has(.app-title) .home-community-card:nth-child(2) {
+  min-height: 64px;
+  padding: 10px 34px 10px 62px;
+}
+.screen:has(.app-title) .home-community-card:nth-child(1) .home-community-description::after,
+.screen:has(.app-title) .home-community-card:nth-child(2) .home-community-description::after {
+  content: none;
+}
+
+/* Backstage controls keep working, but Click no longer appears inside the validation panel.
+   Testing UI should not count as product-world mascot density. */
+.screen:has(.app-title) .viewer-switch {
+  min-height: auto;
+  padding: 12px;
+}
+.screen:has(.app-title) .viewer-switch::after {
+  content: none;
+}
+
+/* PROFILE had two nearby mascot beats. Keep only the community-peek moment.
+   The biography area now belongs entirely to the person. */
+.screen:has(.profile-head) .profile-head {
+  margin-bottom: 0;
+}
+.screen:has(.profile-head) .profile-head::after {
+  content: none;
+}
+
+/* Existing strong semantic placements remain untouched:
+   - HOME move / footprints sniff / lower rest
+   - Footprints sniff
+   - Community detail peek
+   - Topic empty-state wait
+   - Statement reading-end rest
+   - Profile community peek */
+
+@media (max-width: 375px) {
+  .screen:has(.app-title) .home-community-card:nth-child(1),
+  .screen:has(.app-title) .home-community-card:nth-child(2) {
+    min-height: 64px;
+    padding: 10px 34px 10px 62px;
+  }
+
+  .screen:has(.app-title) .viewer-switch {
+    padding: 12px;
+  }
+
+  .screen:has(.profile-head) .profile-head {
+    margin-bottom: 0;
+  }
+}
