@@ -1,0 +1,66 @@
+/* New Kit Gaw Brand Lab v0.1. Preview-only themes. Existing Demo v1 is untouched.
+   Source of truth: https://app.notion.com/p/3c7c10ec598c815baf5fe56fb4eff63e
+   Applied only inside brand-lab/variant.html, not normal home. */
+html[data-brand-lab="editorial"]{
+ --gaw-ground:#eef2f7;--gaw-page:#ffffff;--gaw-section:#f1f5fb;--gaw-card:#fff;--gaw-ink:#19283c;--gaw-muted:#536477;
+ --gaw-blue:#245f9e;--gaw-blue-soft:#e8f2fc;--gaw-orange:#e48b58;--gaw-line:#d4dfe9;
+ --color-bg:var(--gaw-ground);--color-text:var(--gaw-ink);--color-text-soft:var(--gaw-muted);--color-border:var(--gaw-line);
+}
+html[data-brand-lab="city"]{
+ --gaw-ground:#e9e5df;--gaw-page:#fffcf7;--gaw-section:#f2eee7;--gaw-card:#fffefa;--gaw-ink:#263b3d;--gaw-muted:#536461;
+ --gaw-blue:#27758b;--gaw-blue-soft:#e4f1ef;--gaw-orange:#de8857;--gaw-line:#d3d3cb;
+ --color-bg:var(--gaw-ground);--color-text:var(--gaw-ink);--color-text-soft:var(--gaw-muted);--color-border:var(--gaw-line);
+}
+html[data-brand-lab="zine"]{
+ --gaw-ground:#dbe5f3;--gaw-page:#fdfefe;--gaw-section:#e4edfb;--gaw-card:#fff;--gaw-ink:#102b56;--gaw-muted:#47617b;
+ --gaw-blue:#164eae;--gaw-blue-soft:#d8e6fc;--gaw-orange:#f0834e;--gaw-line:#aebdd5;
+ --color-bg:var(--gaw-ground);--color-text:var(--gaw-ink);--color-text-soft:var(--gaw-muted);--color-border:var(--gaw-line);
+}
+html[data-brand-lab] body{background:var(--gaw-ground);color:var(--gaw-ink)}
+html[data-brand-lab] .app-shell{background:var(--gaw-page);border-color:var(--gaw-line)}
+html[data-brand-lab] .screen{background-color:var(--gaw-page)}
+html[data-brand-lab] .card,
+html[data-brand-lab] .self-card,
+html[data-brand-lab] .list-item,
+html[data-brand-lab] .topic-card,
+html[data-brand-lab] .statement-card,
+html[data-brand-lab] .profile-topic-card,
+html[data-brand-lab] .home-community-card,
+html[data-brand-lab] .detail-link,
+html[data-brand-lab] .footprint-item{
+ background:var(--gaw-card);border-color:var(--gaw-line);
+}
+html[data-brand-lab] .person-mini,
+html[data-brand-lab] .context-banner,
+html[data-brand-lab] .empty-state,
+html[data-brand-lab] .search-field{
+ background:var(--gaw-section);border-color:var(--gaw-line);
+}
+html[data-brand-lab] .app-title,
+html[data-brand-lab] .screen-title,
+html[data-brand-lab] .section-title,
+html[data-brand-lab] .body-copy{color:var(--gaw-ink)}
+html[data-brand-lab] .meta,
+html[data-brand-lab] .count{color:var(--gaw-muted)}
+html[data-brand-lab] .text-link,
+html[data-brand-lab] .plain-link,
+html[data-brand-lab] .back-button{color:var(--gaw-blue)}
+html[data-brand-lab] .self-card{border-left-color:var(--gaw-blue)}
+html[data-brand-lab] .community-world > .section-title,
+html[data-brand-lab] .screen:has(.profile-head) > .profile-head + .section-title{
+ background:var(--gaw-blue-soft);border-left-color:var(--gaw-blue);color:var(--gaw-ink);
+}
+html[data-brand-lab] .community-world > .section-title::before,
+html[data-brand-lab] .screen:has(.profile-head) > .profile-head + .section-title::before{color:var(--gaw-blue)}
+html[data-brand-lab="editorial"] .app-title{letter-spacing:-.035em;font-size:28px}
+html[data-brand-lab="editorial"] .card{border-radius:8px;box-shadow:none}
+html[data-brand-lab="editorial"] .section-title{letter-spacing:.035em}
+html[data-brand-lab="city"] .app-shell{border-radius:16px}
+html[data-brand-lab="city"] .home-community-card{border-radius:15px;box-shadow:0 3px 11px #514c3a13}
+html[data-brand-lab="city"] .section-title{letter-spacing:.01em}
+html[data-brand-lab="zine"] .app-title{font-size:30px;font-weight:900;letter-spacing:-.05em}
+html[data-brand-lab="zine"] .screen-title{font-weight:900}
+html[data-brand-lab="zine"] .section-title{border-bottom:2px solid var(--gaw-blue);padding-bottom:5px}
+html[data-brand-lab="zine"] .home-community-card{border-radius:5px;border-width:2px}
+html[data-brand-lab="zine"] .community-world > .section-title{border-left-width:7px}
+@media(prefers-reduced-motion:reduce){html[data-brand-lab] .home-community-card{transition:none}}
